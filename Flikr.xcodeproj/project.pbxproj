@@ -1,0 +1,538 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		80C52EA81C6DD1FE00519A00 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C52EA71C6DD1FE00519A00 /* main.m */; };
+		80C52EAB1C6DD1FE00519A00 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C52EAA1C6DD1FE00519A00 /* AppDelegate.m */; };
+		80C52EAE1C6DD1FE00519A00 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C52EAD1C6DD1FE00519A00 /* ViewController.m */; };
+		80C52EB11C6DD1FE00519A00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80C52EAF1C6DD1FE00519A00 /* Main.storyboard */; };
+		80C52EB41C6DD1FE00519A00 /* Flikr.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 80C52EB21C6DD1FE00519A00 /* Flikr.xcdatamodeld */; };
+		80C52EB61C6DD1FE00519A00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80C52EB51C6DD1FE00519A00 /* Assets.xcassets */; };
+		80C52EB91C6DD1FE00519A00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80C52EB71C6DD1FE00519A00 /* LaunchScreen.storyboard */; };
+		80C52EC41C6DD1FF00519A00 /* FlikrTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C52EC31C6DD1FF00519A00 /* FlikrTests.m */; };
+		80C52ECF1C6DD1FF00519A00 /* FlikrUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C52ECE1C6DD1FF00519A00 /* FlikrUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		80C52EC01C6DD1FF00519A00 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 80C52E9B1C6DD1FE00519A00 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 80C52EA21C6DD1FE00519A00;
+			remoteInfo = Flikr;
+		};
+		80C52ECB1C6DD1FF00519A00 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 80C52E9B1C6DD1FE00519A00 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 80C52EA21C6DD1FE00519A00;
+			remoteInfo = Flikr;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		80C52EA31C6DD1FE00519A00 /* Flikr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flikr.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		80C52EA71C6DD1FE00519A00 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		80C52EA91C6DD1FE00519A00 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		80C52EAA1C6DD1FE00519A00 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		80C52EAC1C6DD1FE00519A00 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		80C52EAD1C6DD1FE00519A00 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		80C52EB01C6DD1FE00519A00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		80C52EB31C6DD1FE00519A00 /* Flikr.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Flikr.xcdatamodel; sourceTree = "<group>"; };
+		80C52EB51C6DD1FE00519A00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		80C52EB81C6DD1FE00519A00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		80C52EBA1C6DD1FE00519A00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		80C52EBF1C6DD1FF00519A00 /* FlikrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlikrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		80C52EC31C6DD1FF00519A00 /* FlikrTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlikrTests.m; sourceTree = "<group>"; };
+		80C52EC51C6DD1FF00519A00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		80C52ECA1C6DD1FF00519A00 /* FlikrUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlikrUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		80C52ECE1C6DD1FF00519A00 /* FlikrUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlikrUITests.m; sourceTree = "<group>"; };
+		80C52ED01C6DD1FF00519A00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		80C52EA01C6DD1FE00519A00 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80C52EBC1C6DD1FF00519A00 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80C52EC71C6DD1FF00519A00 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		80C52E9A1C6DD1FE00519A00 = {
+			isa = PBXGroup;
+			children = (
+				80C52EA51C6DD1FE00519A00 /* Flikr */,
+				80C52EC21C6DD1FF00519A00 /* FlikrTests */,
+				80C52ECD1C6DD1FF00519A00 /* FlikrUITests */,
+				80C52EA41C6DD1FE00519A00 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		80C52EA41C6DD1FE00519A00 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				80C52EA31C6DD1FE00519A00 /* Flikr.app */,
+				80C52EBF1C6DD1FF00519A00 /* FlikrTests.xctest */,
+				80C52ECA1C6DD1FF00519A00 /* FlikrUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		80C52EA51C6DD1FE00519A00 /* Flikr */ = {
+			isa = PBXGroup;
+			children = (
+				80C52EA91C6DD1FE00519A00 /* AppDelegate.h */,
+				80C52EAA1C6DD1FE00519A00 /* AppDelegate.m */,
+				80C52EAC1C6DD1FE00519A00 /* ViewController.h */,
+				80C52EAD1C6DD1FE00519A00 /* ViewController.m */,
+				80C52EAF1C6DD1FE00519A00 /* Main.storyboard */,
+				80C52EB51C6DD1FE00519A00 /* Assets.xcassets */,
+				80C52EB71C6DD1FE00519A00 /* LaunchScreen.storyboard */,
+				80C52EBA1C6DD1FE00519A00 /* Info.plist */,
+				80C52EB21C6DD1FE00519A00 /* Flikr.xcdatamodeld */,
+				80C52EA61C6DD1FE00519A00 /* Supporting Files */,
+			);
+			path = Flikr;
+			sourceTree = "<group>";
+		};
+		80C52EA61C6DD1FE00519A00 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				80C52EA71C6DD1FE00519A00 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		80C52EC21C6DD1FF00519A00 /* FlikrTests */ = {
+			isa = PBXGroup;
+			children = (
+				80C52EC31C6DD1FF00519A00 /* FlikrTests.m */,
+				80C52EC51C6DD1FF00519A00 /* Info.plist */,
+			);
+			path = FlikrTests;
+			sourceTree = "<group>";
+		};
+		80C52ECD1C6DD1FF00519A00 /* FlikrUITests */ = {
+			isa = PBXGroup;
+			children = (
+				80C52ECE1C6DD1FF00519A00 /* FlikrUITests.m */,
+				80C52ED01C6DD1FF00519A00 /* Info.plist */,
+			);
+			path = FlikrUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		80C52EA21C6DD1FE00519A00 /* Flikr */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 80C52ED31C6DD1FF00519A00 /* Build configuration list for PBXNativeTarget "Flikr" */;
+			buildPhases = (
+				80C52E9F1C6DD1FE00519A00 /* Sources */,
+				80C52EA01C6DD1FE00519A00 /* Frameworks */,
+				80C52EA11C6DD1FE00519A00 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Flikr;
+			productName = Flikr;
+			productReference = 80C52EA31C6DD1FE00519A00 /* Flikr.app */;
+			productType = "com.apple.product-type.application";
+		};
+		80C52EBE1C6DD1FF00519A00 /* FlikrTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 80C52ED61C6DD1FF00519A00 /* Build configuration list for PBXNativeTarget "FlikrTests" */;
+			buildPhases = (
+				80C52EBB1C6DD1FF00519A00 /* Sources */,
+				80C52EBC1C6DD1FF00519A00 /* Frameworks */,
+				80C52EBD1C6DD1FF00519A00 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				80C52EC11C6DD1FF00519A00 /* PBXTargetDependency */,
+			);
+			name = FlikrTests;
+			productName = FlikrTests;
+			productReference = 80C52EBF1C6DD1FF00519A00 /* FlikrTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		80C52EC91C6DD1FF00519A00 /* FlikrUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 80C52ED91C6DD1FF00519A00 /* Build configuration list for PBXNativeTarget "FlikrUITests" */;
+			buildPhases = (
+				80C52EC61C6DD1FF00519A00 /* Sources */,
+				80C52EC71C6DD1FF00519A00 /* Frameworks */,
+				80C52EC81C6DD1FF00519A00 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				80C52ECC1C6DD1FF00519A00 /* PBXTargetDependency */,
+			);
+			name = FlikrUITests;
+			productName = FlikrUITests;
+			productReference = 80C52ECA1C6DD1FF00519A00 /* FlikrUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		80C52E9B1C6DD1FE00519A00 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = EGS;
+				TargetAttributes = {
+					80C52EA21C6DD1FE00519A00 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					80C52EBE1C6DD1FF00519A00 = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = 80C52EA21C6DD1FE00519A00;
+					};
+					80C52EC91C6DD1FF00519A00 = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = 80C52EA21C6DD1FE00519A00;
+					};
+				};
+			};
+			buildConfigurationList = 80C52E9E1C6DD1FE00519A00 /* Build configuration list for PBXProject "Flikr" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 80C52E9A1C6DD1FE00519A00;
+			productRefGroup = 80C52EA41C6DD1FE00519A00 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				80C52EA21C6DD1FE00519A00 /* Flikr */,
+				80C52EBE1C6DD1FF00519A00 /* FlikrTests */,
+				80C52EC91C6DD1FF00519A00 /* FlikrUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		80C52EA11C6DD1FE00519A00 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80C52EB91C6DD1FE00519A00 /* LaunchScreen.storyboard in Resources */,
+				80C52EB61C6DD1FE00519A00 /* Assets.xcassets in Resources */,
+				80C52EB11C6DD1FE00519A00 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80C52EBD1C6DD1FF00519A00 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80C52EC81C6DD1FF00519A00 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		80C52E9F1C6DD1FE00519A00 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80C52EAE1C6DD1FE00519A00 /* ViewController.m in Sources */,
+				80C52EAB1C6DD1FE00519A00 /* AppDelegate.m in Sources */,
+				80C52EB41C6DD1FE00519A00 /* Flikr.xcdatamodeld in Sources */,
+				80C52EA81C6DD1FE00519A00 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80C52EBB1C6DD1FF00519A00 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80C52EC41C6DD1FF00519A00 /* FlikrTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		80C52EC61C6DD1FF00519A00 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80C52ECF1C6DD1FF00519A00 /* FlikrUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		80C52EC11C6DD1FF00519A00 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 80C52EA21C6DD1FE00519A00 /* Flikr */;
+			targetProxy = 80C52EC01C6DD1FF00519A00 /* PBXContainerItemProxy */;
+		};
+		80C52ECC1C6DD1FF00519A00 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 80C52EA21C6DD1FE00519A00 /* Flikr */;
+			targetProxy = 80C52ECB1C6DD1FF00519A00 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		80C52EAF1C6DD1FE00519A00 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				80C52EB01C6DD1FE00519A00 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		80C52EB71C6DD1FE00519A00 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				80C52EB81C6DD1FE00519A00 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		80C52ED11C6DD1FF00519A00 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		80C52ED21C6DD1FF00519A00 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		80C52ED41C6DD1FF00519A00 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Flikr/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.EGS.Flikr;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		80C52ED51C6DD1FF00519A00 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Flikr/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.EGS.Flikr;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		80C52ED71C6DD1FF00519A00 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = FlikrTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.EGS.FlikrTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flikr.app/Flikr";
+			};
+			name = Debug;
+		};
+		80C52ED81C6DD1FF00519A00 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = FlikrTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.EGS.FlikrTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flikr.app/Flikr";
+			};
+			name = Release;
+		};
+		80C52EDA1C6DD1FF00519A00 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = FlikrUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.EGS.FlikrUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Flikr;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		80C52EDB1C6DD1FF00519A00 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = FlikrUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.EGS.FlikrUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Flikr;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		80C52E9E1C6DD1FE00519A00 /* Build configuration list for PBXProject "Flikr" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				80C52ED11C6DD1FF00519A00 /* Debug */,
+				80C52ED21C6DD1FF00519A00 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		80C52ED31C6DD1FF00519A00 /* Build configuration list for PBXNativeTarget "Flikr" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				80C52ED41C6DD1FF00519A00 /* Debug */,
+				80C52ED51C6DD1FF00519A00 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		80C52ED61C6DD1FF00519A00 /* Build configuration list for PBXNativeTarget "FlikrTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				80C52ED71C6DD1FF00519A00 /* Debug */,
+				80C52ED81C6DD1FF00519A00 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		80C52ED91C6DD1FF00519A00 /* Build configuration list for PBXNativeTarget "FlikrUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				80C52EDA1C6DD1FF00519A00 /* Debug */,
+				80C52EDB1C6DD1FF00519A00 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		80C52EB21C6DD1FE00519A00 /* Flikr.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				80C52EB31C6DD1FE00519A00 /* Flikr.xcdatamodel */,
+			);
+			currentVersion = 80C52EB31C6DD1FE00519A00 /* Flikr.xcdatamodel */;
+			path = Flikr.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 80C52E9B1C6DD1FE00519A00 /* Project object */;
+}
