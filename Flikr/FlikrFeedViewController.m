@@ -40,10 +40,13 @@
         
         for (int i = 0; i < [photos count]; i++) {
             Photo *aSavedPhoto;
-            NSDictionary *dict = photos[i];
-            if (savedPhotos.count > 0) {
+            if (savedPhotos.count == 0) {
+                aSavedPhoto = nil;
+            } else {
                 aSavedPhoto = savedPhotos[i];
             }
+            NSDictionary *dict = photos[i];
+            
             if (![aSavedPhoto.photoID isEqualToString:[dict valueForKey:@"id"]]) {
                 [self.photoManager addPhoto:dict];
             }
