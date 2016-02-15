@@ -9,11 +9,10 @@
 #import "FlikrFeedViewController.h"
 #import "FlikrWebService.h"
 
-@interface FlikrFeedViewController ()<UICollectionViewDataSource, UICollectionViewDelegate>
-@property (strong, nonatomic) NSArray *farmIDs;
-@property (strong, nonatomic) NSArray *serverIDs;
-@property (strong, nonatomic) NSArray *photoIDs;
-@property (strong, nonatomic) NSArray *secrets;
+@interface FlikrFeedViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate>
+
+@property (strong, nonatomic) Photo *aPhoto;
+@property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
@@ -26,16 +25,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.photoManager = [[PhotoManager alloc] init];
+    self.photoManager.coreDataManager = [CoreDataManager createInstance];
     self.service = [[FlikrWebService alloc] init];
+    self.photoManager.fetchedResultsController.delegate = self;
+    
     [self.service imagesRequest:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error){
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.farmIDs = [dict valueForKeyPath:@"photos.photo.farm"];
-            self.serverIDs = [dict valueForKeyPath:@"photos.photo.server"];
-            self.photoIDs = [dict valueForKeyPath:@"photos.photo.id"];
-            self.secrets = [dict valueForKeyPath:@"photos.photo.secret"];
-        });
+
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        NSArray *photos = [json valueForKeyPath:@"photos.photo"];
+        NSArray *savedPhotos = [self.photoManager photosRequest];
+        
+        NSLog(@"%lu--%lu",(unsigned long)photos.count,(unsigned long)savedPhotos.count);
+        
+        for (int i = 0; i < [photos count]; i++) {
+            Photo *aSavedPhoto;
+            NSDictionary *dict = photos[i];
+            if (savedPhotos.count > 0) {
+                aSavedPhoto = savedPhotos[i];
+            }
+            if (![aSavedPhoto.photoID isEqualToString:[dict valueForKey:@"id"]]) {
+                [self.photoManager addPhoto:dict];
+            }
+        }
     }];
 }
 
@@ -62,25 +74,24 @@
 //------------------------------------------------------------------------------------------
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 9;
+    return [[self.photoManager.fetchedResultsController.sections objectAtIndex:section] numberOfObjects];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-
-    self.service = [[FlikrWebService alloc] init];
-    [self.service imagesRequest:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error){
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSString *photoURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",self.farmIDs[1],self.serverIDs[1],self.photoIDs[1],self.secrets[1]];
-            
-            NSURL *url = [NSURL URLWithString:photoURL];
-            NSData *data = [NSData dataWithContentsOfURL:url];
-            UIImage *img = [[UIImage alloc] initWithData:data];
-            cell.backgroundView = [[UIImageView alloc ] initWithImage:img];
-        });
-    }];
     
+
+    self.aPhoto = [[self.photoManager fetchedResultsController] objectAtIndexPath:indexPath];
+    NSLog(@"fetchedRR%@",self.aPhoto.farmID);
+//    NSString *photoURL = @"https://farm2.staticflickr.com/1491/24340991964_4e13f9a143.jpg";
+    NSString *photoURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",self.aPhoto.farmID,self.aPhoto.serverID,self.aPhoto.photoID,self.aPhoto.secret];
+    
+    
+    NSURL *url = [NSURL URLWithString:photoURL];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    UIImage *img = [[UIImage alloc] initWithData:data];
+    cell.backgroundView = [[UIImageView alloc ] initWithImage:img];
     return cell;
 }
 
@@ -89,6 +100,10 @@
     return CGSizeMake(60, 60);
 }
 
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.collectionView reloadData];
+}
 
 
 /*

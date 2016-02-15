@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		8078EDDB1C6DF3DE00D9ACBF /* FlikrWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8078EDDA1C6DF3DE00D9ACBF /* FlikrWebService.m */; };
+		809E30961C71AB89009C07DC /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 809E30951C71AB89009C07DC /* CoreDataManager.m */; };
+		809E30A21C71ACD7009C07DC /* Photo+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 809E309F1C71ACD7009C07DC /* Photo+CoreDataProperties.m */; };
+		809E30A31C71ACD7009C07DC /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 809E30A11C71ACD7009C07DC /* Photo.m */; };
+		809E30A61C71AD25009C07DC /* PhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 809E30A51C71AD25009C07DC /* PhotoManager.m */; };
 		80C52EA81C6DD1FE00519A00 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C52EA71C6DD1FE00519A00 /* main.m */; };
 		80C52EAB1C6DD1FE00519A00 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 80C52EAA1C6DD1FE00519A00 /* AppDelegate.m */; };
 		80C52EB11C6DD1FE00519A00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 80C52EAF1C6DD1FE00519A00 /* Main.storyboard */; };
@@ -40,6 +44,14 @@
 		8078EDD81C6DF19200D9ACBF /* FlikrService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlikrService.h; sourceTree = "<group>"; };
 		8078EDD91C6DF3DE00D9ACBF /* FlikrWebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlikrWebService.h; sourceTree = "<group>"; };
 		8078EDDA1C6DF3DE00D9ACBF /* FlikrWebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlikrWebService.m; sourceTree = "<group>"; };
+		809E30941C71AB89009C07DC /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
+		809E30951C71AB89009C07DC /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
+		809E309E1C71ACD7009C07DC /* Photo+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Photo+CoreDataProperties.h"; sourceTree = "<group>"; };
+		809E309F1C71ACD7009C07DC /* Photo+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Photo+CoreDataProperties.m"; sourceTree = "<group>"; };
+		809E30A01C71ACD7009C07DC /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		809E30A11C71ACD7009C07DC /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		809E30A41C71AD25009C07DC /* PhotoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoManager.h; sourceTree = "<group>"; };
+		809E30A51C71AD25009C07DC /* PhotoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoManager.m; sourceTree = "<group>"; };
 		80C52EA31C6DD1FE00519A00 /* Flikr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flikr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80C52EA71C6DD1FE00519A00 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		80C52EA91C6DD1FE00519A00 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -92,6 +104,27 @@
 				8078EDDA1C6DF3DE00D9ACBF /* FlikrWebService.m */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		809E309D1C71AC76009C07DC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				809E30A71C71B007009C07DC /* Model */,
+				809E30A41C71AD25009C07DC /* PhotoManager.h */,
+				809E30A51C71AD25009C07DC /* PhotoManager.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		809E30A71C71B007009C07DC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				809E309E1C71ACD7009C07DC /* Photo+CoreDataProperties.h */,
+				809E309F1C71ACD7009C07DC /* Photo+CoreDataProperties.m */,
+				809E30A01C71ACD7009C07DC /* Photo.h */,
+				809E30A11C71ACD7009C07DC /* Photo.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		80C52E9A1C6DD1FE00519A00 = {
@@ -178,6 +211,9 @@
 		80C52EE11C6DD46800519A00 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				809E30941C71AB89009C07DC /* CoreDataManager.h */,
+				809E30951C71AB89009C07DC /* CoreDataManager.m */,
+				809E309D1C71AC76009C07DC /* Models */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -312,8 +348,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				809E30961C71AB89009C07DC /* CoreDataManager.m in Sources */,
 				80C52EAB1C6DD1FE00519A00 /* AppDelegate.m in Sources */,
 				80C52EB41C6DD1FE00519A00 /* Flikr.xcdatamodeld in Sources */,
+				809E30A21C71ACD7009C07DC /* Photo+CoreDataProperties.m in Sources */,
+				809E30A61C71AD25009C07DC /* PhotoManager.m in Sources */,
+				809E30A31C71ACD7009C07DC /* Photo.m in Sources */,
 				80C52EA81C6DD1FE00519A00 /* main.m in Sources */,
 				8078EDDB1C6DF3DE00D9ACBF /* FlikrWebService.m in Sources */,
 				80C52EDE1C6DD44000519A00 /* FlikrFeedViewController.m in Sources */,

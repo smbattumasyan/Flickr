@@ -56,10 +56,13 @@
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="OvV-DP-TBQ" id="pZo-HL-yr6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="980" y="401"/>
+            <point key="canvasLocation" x="1282" y="382"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rC2-Rc-Y5j">
@@ -72,12 +75,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="4kU-tW-Zt8"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Jvk-pO-HvK"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NGf-fP-fgg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="305" y="429"/>
+            <point key="canvasLocation" x="415" y="376"/>
         </scene>
     </scenes>
 </document>
