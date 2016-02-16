@@ -9,6 +9,7 @@
 #import "FlikrFeedViewController.h"
 #import "FlikrWebService.h"
 #import "PhotoManager.h"
+#import "FlikrWebService.h"
 
 @interface FlikrFeedViewController ()< UICollectionViewDelegate>
 
@@ -50,6 +51,7 @@
     PhotoManager *photoManager   = [[PhotoManager alloc] init];
     photoManager.coreDataManager = [CoreDataManager createInstance];
     self.flikrFeedDataController = [FlikrFeedDataController createInstance];
+    self.flikrFeedDataController.service = [[FlikrWebService alloc] init];
     self.flikrFeedDataController.photoManager   = photoManager;
     self.collectionView.dataSource              = self.flikrFeedDataController;
     self.flikrFeedDataController.collectionView = self.collectionView;

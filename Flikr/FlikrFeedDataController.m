@@ -13,7 +13,6 @@
 
 @property (strong, nonatomic) Photo *aPhoto;
 
-
 @end
 
 @implementation FlikrFeedDataController
@@ -51,7 +50,6 @@
 {
     [self.collectionView reloadData];
 }
-
 
 //------------------------------------------------------------------------------------------
 #pragma mark Private Methods
@@ -93,14 +91,12 @@
             }
         }
     }];
-    
 }
 
 - (void)initFetchResultControler
 {
     self.photoManager.fetchedResultsController.delegate = self;
 }
-
 
 - (NSString *)jsonStringWithPrettyPrint:(NSDictionary *)dictionary
 {
