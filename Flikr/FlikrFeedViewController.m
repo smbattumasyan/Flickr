@@ -89,7 +89,7 @@
     NSLog(@"fetchedRR%@",self.aPhoto.farmID);
 //    NSString *photoURL = @"https://farm2.staticflickr.com/1491/24340991964_4e13f9a143.jpg";
     NSString *photoURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",self.aPhoto.farmID,self.aPhoto.serverID,self.aPhoto.photoID,self.aPhoto.secret];
-    
+
     
     NSURL *url = [NSURL URLWithString:photoURL];
     NSData *data = [NSData dataWithContentsOfURL:url];
