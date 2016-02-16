@@ -8,10 +8,14 @@
 
 #import "FlikrFeedViewController.h"
 #import "FlikrWebService.h"
+#import "PhotoManager.h"
 
-@interface FlikrFeedViewController ()<UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate>
+@interface FlikrFeedViewController ()< UICollectionViewDelegate>
 
-@property (strong, nonatomic) Photo *aPhoto;
+//------------------------------------------------------------------------------------------
+#pragma mark - IBOutlets
+//------------------------------------------------------------------------------------------
+
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
@@ -22,93 +26,34 @@
 #pragma mark - View Lifecycle
 //------------------------------------------------------------------------------------------
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.photoManager = [[PhotoManager alloc] init];
-    self.photoManager.coreDataManager = [CoreDataManager createInstance];
-    self.service = [[FlikrWebService alloc] init];
-    self.photoManager.fetchedResultsController.delegate = self;
-    
-    [self.service imagesRequest:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error){
-
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        NSArray *photos = [json valueForKeyPath:@"photos.photo"];
-        NSArray *savedPhotos = [self.photoManager photosRequest];
-        
-        NSLog(@"%lu--%lu",(unsigned long)photos.count,(unsigned long)savedPhotos.count);
-        
-        for (int i = 0; i < [photos count]; i++) {
-            Photo *aSavedPhoto;
-            if (savedPhotos.count == 0) {
-                aSavedPhoto = nil;
-            } else {
-                aSavedPhoto = savedPhotos[i];
-            }
-            NSDictionary *dict = photos[i];
-            
-            if (![aSavedPhoto.photoID isEqualToString:[dict valueForKey:@"id"]]) {
-                [self.photoManager addPhoto:dict];
-            }
-        }
-    }];
+    [self setupCollectionView];
+    [self.flikrFeedDataController initFetchResultControler];
+    [self.flikrFeedDataController savePhotos];
 }
 
-
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (NSString *)jsonStringWithPrettyPrint:(NSDictionary *)dictionary
-{
-    NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary options:0 error:&error];
-    if (!jsonData) {
-        NSLog(@"bv_jsonStringWithPrettyPrint:error:%@",error.localizedDescription);
-        return @"{}";
-    } else {
-        return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    }
-}
-
 //------------------------------------------------------------------------------------------
-#pragma mark - CollectionView Data Source
+#pragma mark - Private Methods
 //------------------------------------------------------------------------------------------
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+
+- (void)setupCollectionView
 {
-    return [[self.photoManager.fetchedResultsController.sections objectAtIndex:section] numberOfObjects];
+    PhotoManager *photoManager   = [[PhotoManager alloc] init];
+    photoManager.coreDataManager = [CoreDataManager createInstance];
+    self.flikrFeedDataController = [FlikrFeedDataController createInstance];
+    self.flikrFeedDataController.photoManager   = photoManager;
+    self.collectionView.dataSource              = self.flikrFeedDataController;
+    self.flikrFeedDataController.collectionView = self.collectionView;
 }
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    
-
-    self.aPhoto = [[self.photoManager fetchedResultsController] objectAtIndexPath:indexPath];
-    NSLog(@"fetchedRR%@",self.aPhoto.farmID);
-//    NSString *photoURL = @"https://farm2.staticflickr.com/1491/24340991964_4e13f9a143.jpg";
-    NSString *photoURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",self.aPhoto.farmID,self.aPhoto.serverID,self.aPhoto.photoID,self.aPhoto.secret];
-
-    
-    NSURL *url = [NSURL URLWithString:photoURL];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    UIImage *img = [[UIImage alloc] initWithData:data];
-    cell.backgroundView = [[UIImageView alloc ] initWithImage:img];
-    return cell;
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CGSizeMake(60, 60);
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    [self.collectionView reloadData];
-}
-
-
 /*
 #pragma mark - Navigation
 

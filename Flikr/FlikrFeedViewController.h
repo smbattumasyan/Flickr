@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FlikrService.h"
-#import "PhotoManager.h"
+#import "FlikrFeedDataController.h"
+
 
 @interface FlikrFeedViewController : UIViewController
 
-@property (strong, nonatomic)  id<FlikrServiceProtocol>service;
-@property (strong, nonatomic) CoreDataManager *coreDataManager;
-@property (strong, nonatomic) PhotoManager *photoManager;
+#pragma mark - Propertes
+@property(strong, nonatomic)FlikrFeedDataController *flikrFeedDataController;
 
 @end

@@ -13,7 +13,7 @@
 
 @protocol FlikrServiceProtocol <NSObject>
 
-#pragma mark = Protocol Methods
+#pragma mark - Protocol Methods
 
 @optional
 

@@ -10,6 +10,10 @@
 
 @implementation PhotoManager
 
+//------------------------------------------------------------------------------------------
+#pragma mark - Class Methods
+//------------------------------------------------------------------------------------------
+
 - (NSMutableArray<Photo *> *)photosRequest {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Photo"];
     return [[self.coreDataManager.managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
@@ -43,7 +47,7 @@
     _fetchedResultsController        = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                                            managedObjectContext:self.coreDataManager.managedObjectContext
                                                                              sectionNameKeyPath:nil cacheName:nil];
-    NSError *error                   = nil;
+    NSError *error = nil;
     
     if( ! [_fetchedResultsController performFetch: &error] ) {
         NSLog( @"Error Description: %@", [error userInfo] );

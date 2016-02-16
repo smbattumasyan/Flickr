@@ -11,6 +11,10 @@
 
 @implementation FlikrWebService 
 
+//------------------------------------------------------------------------------------------
+#pragma mark - Class Methods
+//------------------------------------------------------------------------------------------
+
 - (void)imagesRequest:(void (^)(NSData * _Nullable, NSURLResponse * _Nullable, NSError * _Nullable))completionHandler
 {
     NSURLSession *session          = [NSURLSession sharedSession];

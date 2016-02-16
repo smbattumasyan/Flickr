@@ -12,10 +12,12 @@
 
 @interface PhotoManager : NSObject
 
-@property (nonnull, strong, nonatomic ) CoreDataManager *coreDataManager;
+#pragma mark - Properties
+
+@property (nonnull, strong, nonatomic ) CoreDataManager            *coreDataManager;
 @property (nonnull, strong, nonatomic ) NSFetchedResultsController *fetchedResultsController;
 
-#pragma marik - Instance Methods
+#pragma mark - Instance Methods
 
 - (nullable NSMutableArray<Photo *> *)photosRequest;
 - (void)addPhoto:(nullable NSDictionary *)photo;
