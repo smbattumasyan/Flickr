@@ -60,6 +60,7 @@
     self.aPhoto        = [[self.photoManager fetchedResultsController] objectAtIndexPath:indexPath];
     NSLog(@"fetchedRR%@",self.aPhoto.farmID);
     NSString *photoURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",self.aPhoto.farmID,self.aPhoto.serverID,self.aPhoto.photoID,self.aPhoto.secret];
+//    NSLog(@"%@",photoURL);
     NSURL *url   = [NSURL URLWithString:photoURL];
     NSData *data = [NSData dataWithContentsOfURL:url];
     UIImage *img = [[UIImage alloc] initWithData:data];
@@ -73,21 +74,24 @@
         
         NSDictionary *json   = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         NSArray *photos      = [json valueForKeyPath:@"photos.photo"];
-        NSArray *savedPhotos = [self.photoManager photosRequest];
+        NSMutableArray *savedPhotos = [self.photoManager photosRequest];
 
         NSLog(@"%lu--%lu",(unsigned long)photos.count,(unsigned long)savedPhotos.count);
         
-        for (int i = 0; i < [photos count]; i++) {
+        for (int i = 0; i < [photos count]; ++i) {
+            savedPhotos = [self.photoManager photosRequest];
             Photo *aSavedPhoto;
-            if (savedPhotos.count == 0) {
-                aSavedPhoto = nil;
+            if (i >= savedPhotos.count) {
+                aSavedPhoto.photoID = @"";
             } else {
                 aSavedPhoto = savedPhotos[i];
             }
+           
             NSDictionary *dict = photos[i];
             
             if (![aSavedPhoto.photoID isEqualToString:[dict valueForKey:@"id"]]) {
                 [self.photoManager addPhoto:dict];
+                NSLog(@"%@--%@",aSavedPhoto.photoID ,[dict valueForKey:@"id"]);
             }
         }
     }];

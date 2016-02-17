@@ -22,5 +22,6 @@
 - (void)savePhotos;
 + (instancetype)createInstance;
 - (void)initFetchResultControler;
+- (UIImageView *)setPhotos:(NSIndexPath *)indexPath;
 
 @end

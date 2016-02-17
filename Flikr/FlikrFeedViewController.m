@@ -10,6 +10,7 @@
 #import "FlikrWebService.h"
 #import "PhotoManager.h"
 #import "FlikrWebService.h"
+#import "FlikrDetailsViewController.h"
 
 @interface FlikrFeedViewController ()< UICollectionViewDelegate>
 
@@ -43,7 +44,17 @@
 }
 
 //------------------------------------------------------------------------------------------
-#pragma mark - Private Methods
+#pragma mark - UICollectionView Delegate
+//------------------------------------------------------------------------------------------
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"FlikrFeedViewController" sender:self];
+    NSLog(@"indexPathdidselected:%@",indexPath);
+}
+
+//------------------------------------------------------------------------------------------
+#pragma mark Private Methods
 //------------------------------------------------------------------------------------------
 
 - (void)setupCollectionView
@@ -56,14 +67,20 @@
     self.collectionView.dataSource              = self.flikrFeedDataController;
     self.flikrFeedDataController.collectionView = self.collectionView;
 }
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
+    NSArray *selectedIndexPathArray = [self.collectionView indexPathsForSelectedItems];
+    NSIndexPath *selectedIndexPath = selectedIndexPathArray[0];
+    NSLog(@"indexpathSegue:%@",selectedIndexPath);
+    if ([segue.identifier isEqualToString:@"FlikrFeedViewController"]) {
+        FlikrDetailsViewController *flikrDetailsVC = [segue destinationViewController];
+        flikrDetailsVC.flikrImage = [self.flikrFeedDataController setPhotos:selectedIndexPath];
+    }
 }
-*/
+
 
 @end
