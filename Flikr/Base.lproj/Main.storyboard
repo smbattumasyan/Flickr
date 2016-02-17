@@ -84,7 +84,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Dn6-48-B7n"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iKh-tB-RSQ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="photo name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cLh-Md-f7z">
@@ -242,6 +242,10 @@
                                 <exclude reference="AbL-UP-JkK"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="2eF-tY-Opa"/>
+                                <exclude reference="5Gp-VW-hNM"/>
+                                <exclude reference="sBc-wB-QBq"/>
+                                <exclude reference="xTc-dv-Itk"/>
                                 <exclude reference="01l-t1-ygX"/>
                                 <exclude reference="Cdx-Yj-ICN"/>
                                 <exclude reference="IIT-bR-1nP"/>
@@ -274,10 +278,6 @@
                                 <exclude reference="kBM-Gy-Bnz"/>
                                 <exclude reference="uay-Wa-n7C"/>
                                 <exclude reference="zxb-hg-8J1"/>
-                                <exclude reference="2eF-tY-Opa"/>
-                                <exclude reference="5Gp-VW-hNM"/>
-                                <exclude reference="sBc-wB-QBq"/>
-                                <exclude reference="xTc-dv-Itk"/>
                                 <exclude reference="6b5-hn-SGw"/>
                                 <exclude reference="SSc-P6-q6v"/>
                                 <exclude reference="cgk-ie-qMe"/>
@@ -311,6 +311,10 @@
                                 <include reference="AbL-UP-JkK"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="2eF-tY-Opa"/>
+                                <include reference="5Gp-VW-hNM"/>
+                                <include reference="sBc-wB-QBq"/>
+                                <include reference="xTc-dv-Itk"/>
                                 <exclude reference="2lz-4C-67k"/>
                                 <exclude reference="8fT-MF-dIj"/>
                                 <exclude reference="6xv-wu-4Sk"/>
@@ -328,10 +332,6 @@
                                 <exclude reference="eXD-Kw-YFU"/>
                                 <include reference="kBM-Gy-Bnz"/>
                                 <exclude reference="uay-Wa-n7C"/>
-                                <include reference="2eF-tY-Opa"/>
-                                <include reference="5Gp-VW-hNM"/>
-                                <include reference="sBc-wB-QBq"/>
-                                <include reference="xTc-dv-Itk"/>
                                 <exclude reference="SSc-P6-q6v"/>
                                 <exclude reference="cgk-ie-qMe"/>
                             </mask>
