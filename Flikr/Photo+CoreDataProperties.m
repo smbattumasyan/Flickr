@@ -2,7 +2,7 @@
 //  Photo+CoreDataProperties.m
 //  Flikr
 //
-//  Created by Smbat Tumasyan on 2/15/16.
+//  Created by Smbat Tumasyan on 2/17/16.
 //  Copyright © 2016 EGS. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -17,5 +17,8 @@
 @dynamic serverID;
 @dynamic photoID;
 @dynamic secret;
+@dynamic photoName;
+@dynamic date;
+@dynamic decription;
 
 @end

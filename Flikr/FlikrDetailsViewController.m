@@ -20,6 +20,10 @@
 
 @implementation FlikrDetailsViewController
 
+//------------------------------------------------------------------------------------------
+#pragma mark - View Lifecycle
+//------------------------------------------------------------------------------------------
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -32,6 +36,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+//------------------------------------------------------------------------------------------
+#pragma mark Private Methods
+//------------------------------------------------------------------------------------------
+
 
 /*
 #pragma mark - Navigation
