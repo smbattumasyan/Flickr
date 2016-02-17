@@ -18,7 +18,7 @@
 @optional
 
 - (void)imagesRequest:(nullable void (^)(NSData * _Nullable, NSURLResponse * _Nullable, NSError * _Nullable))completionHandler;
-
+- (void)imageRequest:(nullable NSString*)photoID completionHandler:(nullable void (^)(NSData * _Nullable, NSURLResponse * _Nullable, NSError * _Nullable))completionHandler;
 
 @end
 

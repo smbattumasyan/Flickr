@@ -38,12 +38,13 @@
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
     cell.backgroundView        = [self setPhotos:indexPath];
+    cell.layer.cornerRadius = 10;
     return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(60, 60);
+    return CGSizeMake(80, 80);
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
@@ -70,30 +71,34 @@
 
 - (void)savePhotos
 {
+   __block  NSMutableArray *savedPhotos = [self.photoManager photosRequest];
     [self.service imagesRequest:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error){
         
         NSDictionary *json   = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        NSArray *photos      = [json valueForKeyPath:@"photos.photo"];
-        NSMutableArray *savedPhotos = [self.photoManager photosRequest];
-
-        NSLog(@"%lu--%lu",(unsigned long)photos.count,(unsigned long)savedPhotos.count);
-        
-        for (int i = 0; i < [photos count]; ++i) {
-            savedPhotos = [self.photoManager photosRequest];
-            Photo *aSavedPhoto;
-            if (i >= savedPhotos.count) {
-                aSavedPhoto.photoID = @"";
-            } else {
-                aSavedPhoto = savedPhotos[i];
-            }
-           
-            NSDictionary *dict = photos[i];
+        [self.service imageRequest:[json valueForKeyPath:@"photos.photo.id"] completionHandler:^(NSData * _Nullable dataImg, NSURLResponse * _Nullable responseImg, NSError * _Nullable errorImg) {
+            NSDictionary *jsonImg   = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSLog(@"jsonnn________________:%@",[self jsonStringWithPrettyPrint:jsonImg]);
+            NSArray *photos      = [jsonImg valueForKeyPath:@"photos.photo"];
+            NSLog(@"%lu--%lu",(unsigned long)photos.count,(unsigned long)savedPhotos.count);
             
-            if (![aSavedPhoto.photoID isEqualToString:[dict valueForKey:@"id"]]) {
-                [self.photoManager addPhoto:dict];
-                NSLog(@"%@--%@",aSavedPhoto.photoID ,[dict valueForKey:@"id"]);
+            for (int i = 0; i < [photos count]; ++i) {
+                savedPhotos = [self.photoManager photosRequest];
+                Photo *aSavedPhoto;
+                if (i >= savedPhotos.count) {
+                    aSavedPhoto.photoID = @"";
+                } else {
+                    aSavedPhoto = savedPhotos[i];
+                }
+                
+                NSDictionary *dict = photos[i];
+                
+                if (![aSavedPhoto.photoID isEqualToString:[dict valueForKey:@"id"]]) {
+                    [self.photoManager addPhoto:dict];
+                    NSLog(@"%@--%@",aSavedPhoto.photoID ,[dict valueForKey:@"id"]);
+                }
             }
-        }
+        }];
+        
     }];
 }
 

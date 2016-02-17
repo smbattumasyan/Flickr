@@ -12,6 +12,10 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *flikrImageView;
 
+@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *photoNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+
 @end
 
 @implementation FlikrDetailsViewController
@@ -20,6 +24,8 @@
     [super viewDidLoad];
 
     self.flikrImageView.image = self.flikrImage.image;
+    self.flikrImageView.layer.cornerRadius = 10;
+    self.flikrImageView.layer.masksToBounds = YES;
 }
 
 - (void)didReceiveMemoryWarning {

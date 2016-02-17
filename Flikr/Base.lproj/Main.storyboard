@@ -47,10 +47,18 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="OvV-DP-TBQ" secondAttribute="trailing" id="OAv-B8-wVz"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="OvV-DP-TBQ" secondAttribute="bottom" id="PMj-cV-EB8"/>
-                            <constraint firstItem="OvV-DP-TBQ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Rb3-dU-FuT"/>
-                            <constraint firstItem="OvV-DP-TBQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="hYO-oc-rqW"/>
+                            <constraint firstAttribute="trailing" secondItem="OvV-DP-TBQ" secondAttribute="trailing" id="OAv-B8-wVz">
+                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                            </constraint>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="OvV-DP-TBQ" secondAttribute="bottom" id="PMj-cV-EB8">
+                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                            </constraint>
+                            <constraint firstItem="OvV-DP-TBQ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Rb3-dU-FuT">
+                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                            </constraint>
+                            <constraint firstItem="OvV-DP-TBQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="hYO-oc-rqW">
+                                <variation key="heightClass=regular-widthClass=compact" constant="20"/>
+                            </constraint>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Flikr Feed" id="f9y-O7-AFc">
@@ -331,12 +339,15 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="dateLabel" destination="ISM-FA-uxe" id="ow0-Jw-8sN"/>
+                        <outlet property="descriptionLabel" destination="Q0n-6T-nJy" id="B8f-19-iEm"/>
                         <outlet property="flikrImageView" destination="k4i-DY-DrZ" id="k9D-Wi-N43"/>
+                        <outlet property="photoNameLabel" destination="cLh-Md-f7z" id="G0N-WT-KRz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KYO-Hh-cAJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1789.5" y="352.5"/>
+            <point key="canvasLocation" x="1639.5" y="324.75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="rC2-Rc-Y5j">
@@ -354,7 +365,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NGf-fP-fgg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="415" y="376"/>
+            <point key="canvasLocation" x="262.5" y="364.5"/>
         </scene>
     </scenes>
 </document>

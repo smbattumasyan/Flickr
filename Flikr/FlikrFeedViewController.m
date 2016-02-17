@@ -35,6 +35,7 @@
     [self setupCollectionView];
     [self.flikrFeedDataController initFetchResultControler];
     [self.flikrFeedDataController savePhotos];
+    [self.navigationController.navigationBar setBackgroundColor:[UIColor orangeColor]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,6 +47,14 @@
 //------------------------------------------------------------------------------------------
 #pragma mark - UICollectionView Delegate
 //------------------------------------------------------------------------------------------
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+    return 18;
+}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(100, 100);
+}
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
