@@ -84,7 +84,6 @@
     
     NSArray *selectedIndexPathArray = [self.collectionView indexPathsForSelectedItems];
     NSIndexPath *selectedIndexPath = selectedIndexPathArray[0];
-    NSLog(@"indexpathSegue:%@",selectedIndexPath);
     if ([segue.identifier isEqualToString:@"FlikrFeedViewController"]) {
         FlikrDetailsViewController *flikrDetailsVC = [segue destinationViewController];
         flikrDetailsVC.flikrImage = [self.flikrFeedDataController setPhotos:selectedIndexPath];
