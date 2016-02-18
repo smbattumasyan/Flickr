@@ -59,7 +59,6 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [self performSegueWithIdentifier:@"FlikrFeedViewController" sender:self];
-    NSLog(@"indexPathdidselected:%@",indexPath);
 }
 
 //------------------------------------------------------------------------------------------
@@ -89,7 +88,6 @@
         FlikrDetailsViewController *flikrDetailsVC = [segue destinationViewController];
         flikrDetailsVC.flikrImage = [self.flikrFeedDataController setPhotos:selectedIndexPath];
         flikrDetailsVC.aPhoto = photoParameter;
-        
     }
 }
 

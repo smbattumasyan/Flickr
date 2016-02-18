@@ -30,7 +30,6 @@
     aPhoto.photoDate        = [self setPhotoDateFormat:[NSString stringWithFormat:@"%@",[photo valueForKeyPath:@"dates.taken"]]];
 
     aPhoto.photoDescription = [NSString stringWithFormat:@"%@",[photo valueForKeyPath:@"description._content"]];
-        NSLog(@"ddd%@",[NSString stringWithFormat:@"%@",[photo valueForKeyPath:@"description._content"]]);
     [self.coreDataManager saveContext];
 }
 

@@ -59,9 +59,7 @@
 - (UIImageView *)setPhotos:(NSIndexPath *)indexPath
 {
     self.aPhoto        = [[self.photoManager fetchedResultsController] objectAtIndexPath:indexPath];
-    NSLog(@"fetchedRR%@",self.aPhoto.farmID);
     NSString *photoURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",self.aPhoto.farmID,self.aPhoto.serverID,self.aPhoto.photoID,self.aPhoto.secret];
-//    NSLog(@"%@",photoURL);
     NSURL *url   = [NSURL URLWithString:photoURL];
     NSData *data = [NSData dataWithContentsOfURL:url];
     UIImage *img = [[UIImage alloc] initWithData:data];
@@ -74,32 +72,28 @@
    __block  NSMutableArray *savedPhotos = [self.photoManager photosRequest];
     [self.service imagesRequest:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error){
         NSDictionary *json   = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        NSArray *photos      = [json valueForKeyPath:@"photos.photo.id"];
-        NSLog(@"%@",photos);
-        NSLog(@"%lu--%lu",(unsigned long)photos.count,(unsigned long)savedPhotos.count);
-        for (int i = 0; i < [photos count]; ++i) {
+        NSArray *photosIDs      = [json valueForKeyPath:@"photos.photo.id"];
+        NSLog(@"%lu--%lu",(unsigned long)photosIDs.count,(unsigned long)savedPhotos.count);
+        
+        for (int i = 0; i < [photosIDs count]; ++i) {
+            NSLog(@"ii:%d",i);
             savedPhotos = [self.photoManager photosRequest];
-            
-            [self.service imageRequest:photos[i] completionHandler:^(NSData * _Nullable dataImg, NSURLResponse * _Nullable responseImg, NSError * _Nullable error) {
-                NSDictionary *jsonImg   = [NSJSONSerialization JSONObjectWithData:dataImg options:0 error:nil];
-//                NSLog(@"jsonnn--------:%@",[self jsonStringWithPrettyPrint:jsonImg]);
-                
-                Photo *aSavedPhoto;
-                if (i >= savedPhotos.count) {
-                    aSavedPhoto.photoID = @"";
-                } else {
-                    aSavedPhoto = savedPhotos[i];
-                }
-                
-                NSDictionary *aPhoto = [jsonImg valueForKey:@"photo"];               
-                
-                NSLog(@"jsonnn--------:%@",[self jsonStringWithPrettyPrint:jsonImg]);
-                if (![aSavedPhoto.photoID isEqualToString:[aPhoto valueForKey:@"id"]]) {
-                    [self.photoManager addPhoto:aPhoto];
-                    NSLog(@"%@--%@",aSavedPhoto.photoID ,[aPhoto valueForKey:@"id"]);
-                }
-                
-            }];
+
+            Photo *aSavedPhoto;
+            NSLog(@"i:%d savedPhotosCount:%lu",i,(unsigned long)savedPhotos.count);
+            if (i >= savedPhotos.count) {
+                aSavedPhoto.photoID = @"";
+            } else {
+                aSavedPhoto = savedPhotos[i];
+            }
+            __block NSString *aPhoto = photosIDs[i];
+            if (![aSavedPhoto.photoID isEqualToString:aPhoto]) {
+                [self.service imageRequest:aPhoto completionHandler:^(NSData * _Nullable dataImg, NSURLResponse * _Nullable responseImg, NSError * _Nullable errorImg){
+                    NSDictionary *jsonImg   = [NSJSONSerialization JSONObjectWithData:dataImg options:0 error:nil];
+                    NSDictionary *aNewPhoto = [jsonImg valueForKeyPath:@"photo"];
+                     [self.photoManager addPhoto:aNewPhoto];
+                }];
+            }
         }
     }];
 }
