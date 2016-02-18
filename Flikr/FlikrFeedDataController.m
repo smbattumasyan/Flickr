@@ -74,28 +74,32 @@
    __block  NSMutableArray *savedPhotos = [self.photoManager photosRequest];
     [self.service imagesRequest:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error){
         NSDictionary *json   = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        NSArray *photos      = [json valueForKeyPath:@"photos.photo"];
+        NSArray *photos      = [json valueForKeyPath:@"photos.photo.id"];
+        NSLog(@"%@",photos);
         NSLog(@"%lu--%lu",(unsigned long)photos.count,(unsigned long)savedPhotos.count);
         for (int i = 0; i < [photos count]; ++i) {
             savedPhotos = [self.photoManager photosRequest];
-            Photo *aSavedPhoto;
-            if (i >= savedPhotos.count) {
-                aSavedPhoto.photoID = @"";
-            } else {
-                aSavedPhoto = savedPhotos[i];
-            }
-           
-            NSDictionary *dict = photos[i];
             
-            [self.service imageRequest:[NSString stringWithFormat:@"%@",[dict valueForKey:@"id"]] completionHandler:^(NSData * _Nullable dataImg, NSURLResponse * _Nullable responseImg, NSError * _Nullable error) {
+            [self.service imageRequest:photos[i] completionHandler:^(NSData * _Nullable dataImg, NSURLResponse * _Nullable responseImg, NSError * _Nullable error) {
                 NSDictionary *jsonImg   = [NSJSONSerialization JSONObjectWithData:dataImg options:0 error:nil];
+//                NSLog(@"jsonnn--------:%@",[self jsonStringWithPrettyPrint:jsonImg]);
+                
+                Photo *aSavedPhoto;
+                if (i >= savedPhotos.count) {
+                    aSavedPhoto.photoID = @"";
+                } else {
+                    aSavedPhoto = savedPhotos[i];
+                }
+                
+                NSDictionary *aPhoto = [jsonImg valueForKey:@"photo"];               
+                
                 NSLog(@"jsonnn--------:%@",[self jsonStringWithPrettyPrint:jsonImg]);
+                if (![aSavedPhoto.photoID isEqualToString:[aPhoto valueForKey:@"id"]]) {
+                    [self.photoManager addPhoto:aPhoto];
+                    NSLog(@"%@--%@",aSavedPhoto.photoID ,[aPhoto valueForKey:@"id"]);
+                }
+                
             }];
-            
-            if (![aSavedPhoto.photoID isEqualToString:[dict valueForKey:@"id"]]) {
-                [self.photoManager addPhoto:dict];
-                NSLog(@"%@--%@",aSavedPhoto.photoID ,[dict valueForKey:@"id"]);
-            }
         }
     }];
 }

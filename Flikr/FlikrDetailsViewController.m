@@ -11,7 +11,6 @@
 @interface FlikrDetailsViewController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *flikrImageView;
-
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *photoNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
@@ -26,10 +25,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.photoNameLabel.text = [self.aPhoto photoName];
+    self.dateLabel.text = [NSDateFormatter localizedStringFromDate:self.aPhoto.photoDate dateStyle:NSDateFormatterShortStyle timeStyle:
+                           NSDateFormatterShortStyle];
+    NSLog(@"%@",self.aPhoto.photoDate);
+    self.descriptionLabel.text = [self.aPhoto photoDescription];
 
-    self.flikrImageView.image = self.flikrImage.image;
-    self.flikrImageView.layer.cornerRadius = 10;
-    self.flikrImageView.layer.masksToBounds = YES;
+    [self setFlikrImageView:self.flikrImageView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,6 +44,11 @@
 #pragma mark Private Methods
 //------------------------------------------------------------------------------------------
 
+- (void)setFlikrImageView:(UIImageView *)flikrImageView {
+    flikrImageView.image = self.flikrImage.image;
+    flikrImageView.layer.cornerRadius = 10;
+    flikrImageView.layer.masksToBounds = YES;
+}
 
 /*
 #pragma mark - Navigation

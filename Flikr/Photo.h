@@ -2,7 +2,7 @@
 //  Photo.h
 //  Flikr
 //
-//  Created by Smbat Tumasyan on 2/17/16.
+//  Created by Smbat Tumasyan on 2/18/16.
 //  Copyright © 2016 EGS. All rights reserved.
 //
 
