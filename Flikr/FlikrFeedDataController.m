@@ -69,31 +69,26 @@
 
 - (void)savePhotos
 {
-   __block  NSMutableArray *savedPhotos = [self.photoManager photosRequest];
-    [self.service imagesRequest:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error){
-        NSDictionary *json   = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        NSArray *photosIDs      = [json valueForKeyPath:@"photos.photo.id"];
-        NSLog(@"%lu--%lu",(unsigned long)photosIDs.count,(unsigned long)savedPhotos.count);
-        
-        for (int i = 0; i < [photosIDs count]; ++i) {
-            NSLog(@"ii:%d",i);
+    __block  NSMutableArray *savedPhotos;
+    [self.service imagesRequest:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSDictionary *imageJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        NSArray *photosIDs = [imageJson valueForKeyPath:@"photos.photo.id"];
+        BOOL isTherePhoto = NO;
+        for (NSString *aPhotoID in photosIDs) {
             savedPhotos = [self.photoManager photosRequest];
-
-            Photo *aSavedPhoto;
-            NSLog(@"i:%d savedPhotosCount:%lu",i,(unsigned long)savedPhotos.count);
-            if (i >= savedPhotos.count) {
-                aSavedPhoto.photoID = @"";
-            } else {
-                aSavedPhoto = savedPhotos[i];
+            for (Photo *aSavedPhotos in savedPhotos) {
+                if ([aSavedPhotos.photoID isEqualToString:aPhotoID]) {
+                    NSLog(@"Equalll!");
+                    isTherePhoto = YES;
+                }
             }
-            __block NSString *aPhoto = photosIDs[i];
-            if (![aSavedPhoto.photoID isEqualToString:aPhoto]) {
-                [self.service imageRequest:aPhoto completionHandler:^(NSData * _Nullable dataImg, NSURLResponse * _Nullable responseImg, NSError * _Nullable errorImg){
-                    NSDictionary *jsonImg   = [NSJSONSerialization JSONObjectWithData:dataImg options:0 error:nil];
-                    NSDictionary *aNewPhoto = [jsonImg valueForKeyPath:@"photo"];
-                     [self.photoManager addPhoto:aNewPhoto];
+            if (!isTherePhoto) {
+                [self.service imageRequest:aPhotoID completionHandler:^(NSData * _Nullable dataImg, NSURLResponse * _Nullable responseImg, NSError * _Nullable errorImg) {
+                    NSDictionary *aImageJson = [NSJSONSerialization JSONObjectWithData:dataImg options:0 error:nil];
+                    [self.photoManager addPhoto:[aImageJson valueForKeyPath:@"photo"]];
                 }];
-            }
+            }            
+            isTherePhoto = NO;
         }
     }];
 }
