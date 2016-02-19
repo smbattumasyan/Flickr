@@ -78,7 +78,6 @@
             savedPhotos = [self.photoManager photosRequest];
             for (Photo *aSavedPhotos in savedPhotos) {
                 if ([aSavedPhotos.photoID isEqualToString:aPhotoID]) {
-                    NSLog(@"Equalll!");
                     isTherePhoto = YES;
                 }
             }
