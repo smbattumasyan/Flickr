@@ -74,6 +74,7 @@
         NSDictionary *imageJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         NSArray *photosIDs      = [imageJson valueForKeyPath:@"photos.photo.id"];
         BOOL isTherePhoto       = NO;
+        BOOL isThereNoPhoto     = NO;
         for (NSString *aPhotoID in photosIDs) {
             savedPhotos = [self.photoManager photosRequest];
             for (Photo *aSavedPhotos in savedPhotos) {
@@ -88,6 +89,18 @@
                 }];
             }
             isTherePhoto = NO;
+        }
+        savedPhotos = [self.photoManager photosRequest];
+        for (Photo *aSavedPhoto in savedPhotos) {
+            for (NSString *aPhotoID in photosIDs) {
+                if ([aSavedPhoto.photoID isEqualToString:aPhotoID]) {
+                    isThereNoPhoto = YES;
+                }
+            }
+            if (!isThereNoPhoto) {
+                [self.photoManager deletePhoto:aSavedPhoto];
+            }
+            isThereNoPhoto = NO;
         }
     }];
 }
