@@ -64,6 +64,9 @@
                     <navigationItem key="navigationItem" title="Flikr Feed" id="f9y-O7-AFc">
                         <barButtonItem key="rightBarButtonItem" title="Update" id="LlO-AJ-Gkf">
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="updateButtonAction:" destination="BYZ-38-t0r" id="XRl-H8-eEU"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>

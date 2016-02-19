@@ -31,7 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     [self setupCollectionView];
     [self.flikrFeedDataController initFetchResultControler];
     [self.flikrFeedDataController savePhotos];
@@ -60,6 +60,15 @@
 {
     [self performSegueWithIdentifier:@"FlikrFeedViewController" sender:self];
 }
+
+//------------------------------------------------------------------------------------------
+#pragma mark - View IBOutlets Action
+//------------------------------------------------------------------------------------------
+
+- (IBAction)updateButtonAction:(UIBarButtonItem *)sender {
+    [self.flikrFeedDataController savePhotos];
+}
+
 
 //------------------------------------------------------------------------------------------
 #pragma mark Private Methods
