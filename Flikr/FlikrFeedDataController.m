@@ -72,8 +72,8 @@
     __block  NSMutableArray *savedPhotos;
     [self.service imagesRequest:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSDictionary *imageJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        NSArray *photosIDs = [imageJson valueForKeyPath:@"photos.photo.id"];
-        BOOL isTherePhoto = NO;
+        NSArray *photosIDs      = [imageJson valueForKeyPath:@"photos.photo.id"];
+        BOOL isTherePhoto       = NO;
         for (NSString *aPhotoID in photosIDs) {
             savedPhotos = [self.photoManager photosRequest];
             for (Photo *aSavedPhotos in savedPhotos) {
@@ -87,7 +87,7 @@
                     NSDictionary *aImageJson = [NSJSONSerialization JSONObjectWithData:dataImg options:0 error:nil];
                     [self.photoManager addPhoto:[aImageJson valueForKeyPath:@"photo"]];
                 }];
-            }            
+            }
             isTherePhoto = NO;
         }
     }];
