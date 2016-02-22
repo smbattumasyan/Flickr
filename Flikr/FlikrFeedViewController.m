@@ -61,6 +61,11 @@
     [self performSegueWithIdentifier:@"FlikrFeedViewController" sender:self];
 }
 
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView
+{
+    NSLog(@"Scroll!");
+}
+
 //------------------------------------------------------------------------------------------
 #pragma mark - View IBOutlets Action
 //------------------------------------------------------------------------------------------

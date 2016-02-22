@@ -37,7 +37,22 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    cell.backgroundView        = [self setPhotos:indexPath];
+    self.aPhoto        = [[self.photoManager fetchedResultsController] objectAtIndexPath:indexPath];
+    NSString *photoURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",self.aPhoto.farmID,self.aPhoto.serverID,self.aPhoto.photoID,self.aPhoto.secret];
+    NSURL *url         = [NSURL URLWithString:photoURL];
+    NSLog(@"%@",photoURL);
+    NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (data) {
+            UIImage *image = [UIImage imageWithData:data];
+            if (image) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    cell.backgroundView = [[UIImageView alloc ] initWithImage:image];
+                    NSLog(@"set!");
+                });
+            }
+        }
+    }];
+    [task resume];
     cell.layer.cornerRadius = 10;
     return cell;
 }
