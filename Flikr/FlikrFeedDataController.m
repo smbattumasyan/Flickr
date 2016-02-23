@@ -11,7 +11,6 @@
 
 @interface FlikrFeedDataController ()
 
-//@property (strong, nonatomic) Photo *aPhoto;
 
 @end
 
@@ -123,6 +122,7 @@
         NSDictionary *imageJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         NSArray *photosIDs      = [imageJson valueForKeyPath:@"photos.photo.id"];
         NSMutableArray *savedPhotos;
+        
         for (NSString *aPhotoID in photosIDs) {
             savedPhotos = [[self.photoManager photosRequest] valueForKey:@"photoID"];
             [savedPhotos containsObject:aPhotoID];
@@ -135,6 +135,7 @@
             }
         }
         savedPhotos = [self.photoManager photosRequest];
+        
         for (Photo *aSavedPhotoID in savedPhotos) {
             if (![photosIDs containsObject:aSavedPhotoID.photoID]) {
                 [self.photoManager deletePhoto:aSavedPhotoID];
