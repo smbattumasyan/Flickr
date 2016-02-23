@@ -11,7 +11,7 @@
 
 @interface FlikrFeedDataController ()
 
-@property (strong, nonatomic) Photo *aPhoto;
+//@property (strong, nonatomic) Photo *aPhoto;
 
 @end
 
@@ -37,35 +37,70 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    self.aPhoto        = [[self.photoManager fetchedResultsController] objectAtIndexPath:indexPath];
-    NSString *photoURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",self.aPhoto.farmID,self.aPhoto.serverID,self.aPhoto.photoID,self.aPhoto.secret];
+    Photo *aPhoto        = [[self.photoManager fetchedResultsController] objectAtIndexPath:indexPath];
+   
+    NSString *photoURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",aPhoto.farmID,aPhoto.serverID,aPhoto.photoID,aPhoto.secret];
     NSURL *url         = [NSURL URLWithString:photoURL];
-    NSLog(@"%@",photoURL);
+    NSLog(@"__indexPath:(%ld) photourl:(%@)",(long)indexPath.row, photoURL);
+    cell.backgroundColor = [UIColor grayColor];
     NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
         if (data) {
             UIImage *image = [UIImage imageWithData:data];
             if (image) {
-                dispatch_async(dispatch_get_main_queue(), ^{
+                    dispatch_async(dispatch_get_main_queue(), ^{
                     cell.backgroundView = [[UIImageView alloc ] initWithImage:image];
                     NSLog(@"set!");
                 });
             }
         }
     }];
+    
     [task resume];
     cell.layer.cornerRadius = 10;
     return cell;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(80, 80);
 }
 
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    switch(type) {
+            
+        case NSFetchedResultsChangeInsert:
+            [self.collectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.collectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self.collectionView reloadData];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            
+            break;
+    }
+}
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [self.collectionView reloadData];
+//    [self.collectionView reloadData];
 }
+
 
 //------------------------------------------------------------------------------------------
 #pragma mark Private Methods
@@ -73,8 +108,8 @@
 
 - (UIImageView *)setPhotos:(NSIndexPath *)indexPath
 {
-    self.aPhoto        = [[self.photoManager fetchedResultsController] objectAtIndexPath:indexPath];
-    NSString *photoURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",self.aPhoto.farmID,self.aPhoto.serverID,self.aPhoto.photoID,self.aPhoto.secret];
+    Photo *aPhoto        = [[self.photoManager fetchedResultsController] objectAtIndexPath:indexPath];
+    NSString *photoURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",aPhoto.farmID,aPhoto.serverID,aPhoto.photoID,aPhoto.secret];
     NSURL *url   = [NSURL URLWithString:photoURL];
     NSData *data = [NSData dataWithContentsOfURL:url];
     UIImage *img = [[UIImage alloc] initWithData:data];
@@ -84,38 +119,26 @@
 
 - (void)savePhotos
 {
-    __block  NSMutableArray *savedPhotos;
     [self.service imagesRequest:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSDictionary *imageJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         NSArray *photosIDs      = [imageJson valueForKeyPath:@"photos.photo.id"];
-        BOOL isTherePhoto       = NO;
-        BOOL isThereNoPhoto     = NO;
+        NSMutableArray *savedPhotos;
         for (NSString *aPhotoID in photosIDs) {
-            savedPhotos = [self.photoManager photosRequest];
-            for (Photo *aSavedPhotos in savedPhotos) {
-                if ([aSavedPhotos.photoID isEqualToString:aPhotoID]) {
-                    isTherePhoto = YES;
-                }
-            }
-            if (!isTherePhoto) {
+            savedPhotos = [[self.photoManager photosRequest] valueForKey:@"photoID"];
+            [savedPhotos containsObject:aPhotoID];
+
+            if (![savedPhotos containsObject:aPhotoID]) {
                 [self.service imageRequest:aPhotoID completionHandler:^(NSData * _Nullable dataImg, NSURLResponse * _Nullable responseImg, NSError * _Nullable errorImg) {
                     NSDictionary *aImageJson = [NSJSONSerialization JSONObjectWithData:dataImg options:0 error:nil];
                     [self.photoManager addPhoto:[aImageJson valueForKeyPath:@"photo"]];
                 }];
             }
-            isTherePhoto = NO;
         }
         savedPhotos = [self.photoManager photosRequest];
-        for (Photo *aSavedPhoto in savedPhotos) {
-            for (NSString *aPhotoID in photosIDs) {
-                if ([aSavedPhoto.photoID isEqualToString:aPhotoID]) {
-                    isThereNoPhoto = YES;
-                }
+        for (Photo *aSavedPhotoID in savedPhotos) {
+            if (![photosIDs containsObject:aSavedPhotoID.photoID]) {
+                [self.photoManager deletePhoto:aSavedPhotoID];
             }
-            if (!isThereNoPhoto) {
-                [self.photoManager deletePhoto:aSavedPhoto];
-            }
-            isThereNoPhoto = NO;
         }
     }];
 }
