@@ -11,7 +11,6 @@
 
 @interface FlikrFeedDataController ()
 
-
 @end
 
 @implementation FlikrFeedDataController
@@ -36,12 +35,12 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    Photo *aPhoto        = [[self.photoManager fetchedResultsController] objectAtIndexPath:indexPath];
-   
-    NSString *photoURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",aPhoto.farmID,aPhoto.serverID,aPhoto.photoID,aPhoto.secret];
-    NSURL *url         = [NSURL URLWithString:photoURL];
+    Photo *aPhoto              = [[self.photoManager fetchedResultsController] objectAtIndexPath:indexPath];
+
+    NSString *photoURL         = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",aPhoto.farmID,aPhoto.serverID,aPhoto.photoID,aPhoto.secret];
+    NSURL *url                 = [NSURL URLWithString:photoURL];
     NSLog(@"__indexPath:(%ld) photourl:(%@)",(long)indexPath.row, photoURL);
-    cell.backgroundColor = [UIColor grayColor];
+    cell.backgroundColor   = [UIColor grayColor];
     NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
         if (data) {
