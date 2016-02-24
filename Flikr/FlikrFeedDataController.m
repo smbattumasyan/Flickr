@@ -24,9 +24,9 @@
     FlikrFeedDataController *dataController = [[FlikrFeedDataController alloc] init];
     return dataController;
 }
-    //------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
 #pragma mark - CollectionView Data Source
-    //------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return [[self.photoManager.fetchedResultsController.sections objectAtIndex:section] numberOfObjects];
@@ -35,27 +35,31 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    Photo *aPhoto              = [[self.photoManager fetchedResultsController] objectAtIndexPath:indexPath];
-
-    NSString *photoURL         = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",aPhoto.farmID,aPhoto.serverID,aPhoto.photoID,aPhoto.secret];
-    NSURL *url                 = [NSURL URLWithString:photoURL];
-    NSLog(@"__indexPath:(%ld) photourl:(%@)",(long)indexPath.row, photoURL);
-    cell.backgroundColor   = [UIColor grayColor];
-    NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        
-        if (data) {
-            UIImage *image = [UIImage imageWithData:data];
-            if (image) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                    cell.backgroundView = [[UIImageView alloc ] initWithImage:image];
-                    NSLog(@"set!");
-                });
-            }
-        }
-    }];
     
-    [task resume];
-    cell.layer.cornerRadius = 10;
+    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(queue, ^{
+        Photo *aPhoto              = [[self.photoManager fetchedResultsController] objectAtIndexPath:indexPath];
+        
+        NSString *photoURL         = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",aPhoto.farmID,aPhoto.serverID,aPhoto.photoID,aPhoto.secret];
+        NSURL *url                 = [NSURL URLWithString:photoURL];
+        NSLog(@"__indexPath:(%ld) photourl:(%@)",(long)indexPath.row, photoURL);
+        cell.backgroundColor   = [UIColor grayColor];
+        NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            
+            if (data) {
+                UIImage *image = [UIImage imageWithData:data];
+                if (image) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        cell.backgroundView = [[UIImageView alloc ] initWithImage:image];
+                        NSLog(@"set!");
+                    });
+                }
+            }
+        }];
+         [task resume];
+        cell.layer.cornerRadius = 10;
+    });
+    
     return cell;
 }
 
