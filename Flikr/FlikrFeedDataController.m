@@ -90,7 +90,6 @@
             break;
             
         case NSFetchedResultsChangeUpdate:
-            [self.collectionView reloadData];
             break;
             
         case NSFetchedResultsChangeMove:
@@ -124,6 +123,12 @@
     [self.service imagesRequest:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSDictionary *imageJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         [self.photoManager addPhoto:[imageJson valueForKeyPath:@"photos.photo"]];
+        
+//        NSArray *photos = [imageJson valueForKeyPath:@"photos.photo"];
+//        for (NSDictionary *dict in photos) {
+//            [self.photoManager addPhoto:dict];
+//        }
+        
 //        NSArray *photosIDs      = [imageJson valueForKeyPath:@"photos.photo.id"];
 //        NSMutableArray *savedPhotos;
 //        savedPhotos = [[self.photoManager photosRequest] valueForKey:@"photoID"];
