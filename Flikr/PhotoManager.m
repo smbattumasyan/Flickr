@@ -22,14 +22,16 @@
 - (void)addPhoto:(nullable NSDictionary *)photo
 {
     Photo *aPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:self.coreDataManager.managedObjectContext];
-    aPhoto.farmID           = [NSString stringWithFormat:@"%@",[photo valueForKeyPath:@"farm"]];
-    aPhoto.serverID         = [NSString stringWithFormat:@"%@",[photo valueForKeyPath:@"server"]];
-    aPhoto.photoID          = [NSString stringWithFormat:@"%@",[photo valueForKeyPath:@"id"]];
-    aPhoto.secret           = [NSString stringWithFormat:@"%@",[photo valueForKeyPath:@"secret"]];
-    aPhoto.photoName        = [NSString stringWithFormat:@"%@",[photo valueForKeyPath:@"title._content"]];    
-    aPhoto.photoDate        = [self setPhotoDateFormat:[NSString stringWithFormat:@"%@",[photo valueForKeyPath:@"dates.taken"]]];
-
-    aPhoto.photoDescription = [NSString stringWithFormat:@"%@",[photo valueForKeyPath:@"description._content"]];
+    
+    NSDictionary *description = [photo valueForKey:@"descripotion"];
+    NSDictionary *dates = [photo valueForKey:@"dates"];
+    aPhoto.farmID           = [NSString stringWithFormat:@"%@",[photo valueForKey:@"farm"]];
+    aPhoto.serverID         = [NSString stringWithFormat:@"%@",[photo valueForKey:@"server"]];
+    aPhoto.photoID          = [NSString stringWithFormat:@"%@",[photo valueForKey:@"id"]];
+    aPhoto.secret           = [NSString stringWithFormat:@"%@",[photo valueForKey:@"secret"]];
+    aPhoto.photoName        = [NSString stringWithFormat:@"%@",[photo valueForKey:@"title"]];
+    aPhoto.photoDate        = [self setPhotoDateFormat:[NSString stringWithFormat:@"%@",[dates valueForKey:@"taken"]]];
+    aPhoto.photoDescription = [NSString stringWithFormat:@"%@",[description valueForKey:@"_content"]];
     [self.coreDataManager saveContext];
 }
 

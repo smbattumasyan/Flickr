@@ -35,13 +35,13 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
+    cell.backgroundView        = nil;
     
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
-        Photo *aPhoto              = [[self.photoManager fetchedResultsController] objectAtIndexPath:indexPath];
-        
-        NSString *photoURL         = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",aPhoto.farmID,aPhoto.serverID,aPhoto.photoID,aPhoto.secret];
-        NSURL *url                 = [NSURL URLWithString:photoURL];
+        Photo *aPhoto      = [[self.photoManager fetchedResultsController] objectAtIndexPath:indexPath];
+        NSString *photoURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",aPhoto.farmID,aPhoto.serverID,aPhoto.photoID,aPhoto.secret];
+        NSURL *url         = [NSURL URLWithString:photoURL];
         NSLog(@"__indexPath:(%ld) photourl:(%@)",(long)indexPath.row, photoURL);
         cell.backgroundColor   = [UIColor grayColor];
         NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -123,27 +123,28 @@
 {
     [self.service imagesRequest:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSDictionary *imageJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        NSArray *photosIDs      = [imageJson valueForKeyPath:@"photos.photo.id"];
-        NSMutableArray *savedPhotos;
-        
-        for (NSString *aPhotoID in photosIDs) {
-            savedPhotos = [[self.photoManager photosRequest] valueForKey:@"photoID"];
-            [savedPhotos containsObject:aPhotoID];
-
-            if (![savedPhotos containsObject:aPhotoID]) {
-                [self.service imageRequest:aPhotoID completionHandler:^(NSData * _Nullable dataImg, NSURLResponse * _Nullable responseImg, NSError * _Nullable errorImg) {
-                    NSDictionary *aImageJson = [NSJSONSerialization JSONObjectWithData:dataImg options:0 error:nil];
-                    [self.photoManager addPhoto:[aImageJson valueForKeyPath:@"photo"]];
-                }];
-            }
-        }
-        savedPhotos = [self.photoManager photosRequest];
-        
-        for (Photo *aSavedPhotoID in savedPhotos) {
-            if (![photosIDs containsObject:aSavedPhotoID.photoID]) {
-                [self.photoManager deletePhoto:aSavedPhotoID];
-            }
-        }
+        [self.photoManager addPhoto:[imageJson valueForKeyPath:@"photos.photo"]];
+//        NSArray *photosIDs      = [imageJson valueForKeyPath:@"photos.photo.id"];
+//        NSMutableArray *savedPhotos;
+//        savedPhotos = [[self.photoManager photosRequest] valueForKey:@"photoID"];
+//        for (NSString *aPhotoID in photosIDs) {
+//            
+//            [savedPhotos containsObject:aPhotoID];
+//
+//            if (![savedPhotos containsObject:aPhotoID]) {
+//                [self.service imageRequest:aPhotoID completionHandler:^(NSData * _Nullable dataImg, NSURLResponse * _Nullable responseImg, NSError * _Nullable errorImg) {
+//                    NSDictionary *aImageJson = [NSJSONSerialization JSONObjectWithData:dataImg options:0 error:nil];
+//                    
+//                }];
+//            }
+//        }
+//        savedPhotos = [self.photoManager photosRequest];
+//        
+//        for (Photo *aSavedPhotoID in savedPhotos) {
+//            if (![photosIDs containsObject:aSavedPhotoID.photoID]) {
+//                [self.photoManager deletePhoto:aSavedPhotoID];
+//            }
+//        }
     }];
 }
 
