@@ -26,8 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.photoNameLabel.text = [self.aPhoto photoName];
-    self.dateLabel.text = [NSDateFormatter localizedStringFromDate:self.aPhoto.photoDate dateStyle:NSDateFormatterShortStyle timeStyle:
+    self.photoNameLabel.text   = [self.aPhoto photoName];
+    self.dateLabel.text        = [NSDateFormatter localizedStringFromDate:self.aPhoto.photoDate dateStyle:NSDateFormatterShortStyle timeStyle:
                            NSDateFormatterShortStyle];
     NSLog(@"%@",self.aPhoto.photoDate);
     self.descriptionLabel.text = [self.aPhoto photoDescription];
@@ -45,8 +45,8 @@
 //------------------------------------------------------------------------------------------
 
 - (void)setFlikrImageView:(UIImageView *)flikrImageView {
-    flikrImageView.image = self.flikrImage.image;
-    flikrImageView.layer.cornerRadius = 10;
+    flikrImageView.image               = self.flikrImage.image;
+    flikrImageView.layer.cornerRadius  = 10;
     flikrImageView.layer.masksToBounds = YES;
 }
 

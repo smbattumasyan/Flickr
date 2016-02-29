@@ -22,18 +22,30 @@
 - (void)addPhoto:(nullable NSDictionary *)photo
 {
     Photo *aPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:self.coreDataManager.managedObjectContext];
+//    NSLog(@"%@",[[photo valueForKey:@"id"] componentsJoinedByString:@","]);
     
     NSDictionary *description = [photo valueForKey:@"descripotion"];
-    NSDictionary *dates = [photo valueForKey:@"dates"];
-    aPhoto.farmID           = [NSString stringWithFormat:@"%@",[photo valueForKey:@"farm"]];
-    aPhoto.serverID         = [NSString stringWithFormat:@"%@",[photo valueForKey:@"server"]];
-    aPhoto.photoID          = [NSString stringWithFormat:@"%@",[photo valueForKey:@"id"]];
-    aPhoto.secret           = [NSString stringWithFormat:@"%@",[photo valueForKey:@"secret"]];
-    aPhoto.photoName        = [NSString stringWithFormat:@"%@",[photo valueForKey:@"title"]];
-    aPhoto.photoDate        = [self setPhotoDateFormat:[NSString stringWithFormat:@"%@",[dates valueForKey:@"taken"]]];
-    aPhoto.photoDescription = [NSString stringWithFormat:@"%@",[description valueForKey:@"_content"]];
+    NSDictionary *dates       = [photo valueForKey:@"dates"];
+    aPhoto.farmID             = [[photo valueForKey:@"farm"] componentsJoinedByString:@","];
+    aPhoto.serverID           = [[photo valueForKey:@"server"] componentsJoinedByString:@","];
+    aPhoto.photoID            = [[photo valueForKey:@"id"] componentsJoinedByString:@","];
+    aPhoto.secret             = [[photo valueForKey:@"secret"] componentsJoinedByString:@","];
+    aPhoto.photoName          = [[photo valueForKey:@"title"] componentsJoinedByString:@","];
+    aPhoto.photoDate          = [self setPhotoDateFormat:[NSString stringWithFormat:@"%@",[dates valueForKey:@"taken"]]];
+    aPhoto.photoDescription   = [[description valueForKey:@"_content"] componentsJoinedByString:@","];
+
+//    [aPhoto setValue:[NSString stringWithFormat:@"%@",[photo valueForKey:@"farm"]] forKey:@"farmID"];
+
+    
     [self.coreDataManager saveContext];
 }
+
+//- (void)updatePhoto:(nullable Photo *)aPhoto newPhoto:(nullable NSDictionary *)newPhoto
+//{
+//    NSDictionary *description = [newPhoto valueForKey:@"descripotion"];
+//    NSDictionary *dates       = [newPhoto valueForKey:@"dates"];
+//    [aPhoto setValue: forKey:@"description"];
+//}
 
 - (NSDate *)setPhotoDateFormat:(NSString *)dateString
 {

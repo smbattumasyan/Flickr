@@ -96,12 +96,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     NSArray *selectedIndexPathArray = [self.collectionView indexPathsForSelectedItems];
-    NSIndexPath *selectedIndexPath = selectedIndexPathArray[0];
-    Photo *photoParameter = [self.flikrFeedDataController.photoManager.fetchedResultsController objectAtIndexPath:selectedIndexPath];
+    NSIndexPath *selectedIndexPath  = selectedIndexPathArray[0];
+//    Photo *photoParameter = [self.flikrFeedDataController.photoManager.fetchedResultsController objectAtIndexPath:selectedIndexPath];
     if ([segue.identifier isEqualToString:@"FlikrFeedViewController"]) {
         FlikrDetailsViewController *flikrDetailsVC = [segue destinationViewController];
         flikrDetailsVC.flikrImage = [self.flikrFeedDataController setPhotos:selectedIndexPath];
-        flikrDetailsVC.aPhoto = photoParameter;
+//        flikrDetailsVC.aPhoto     = photoParameter;
     }
 }
 
