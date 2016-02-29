@@ -127,6 +127,11 @@
         NSDictionary *imageJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         [self.photoManager addPhoto:[imageJson valueForKeyPath:@"photos.photo"]];
         
+        for (NSDictionary *aPhoto in [imageJson valueForKeyPath:@"photos.photo"]) {
+            [self.photoManager addPhoto:aPhoto];
+        }
+        
+        [self.coreDataManager saveContext];
 //        NSDictionary *dict = @{@"name":@"anun", @"names":@[@{@"photoID":@"123456"}, @{@"photoID": @"654132"}]};
 //        NSLog(@"%@",[dict valueForKeyPath:@"names.photoID"]);
 //        if ([[dict valueForKeyPath:@"names.photoID"] isKindOfClass:[NSArray class]]) {
@@ -170,15 +175,14 @@
 
 - (NSString *)loadPhotoURL:(NSIndexPath *)indexPath
 {
-    NSArray *photos    = [[self.photoManager fetchedResultsController] fetchedObjects];
-    Photo *aPhoto      = [photos lastObject];
+    Photo *aPhoto    = [[self.photoManager fetchedResultsController] objectAtIndexPath:indexPath];
 
-    NSArray *farmID    = [aPhoto.farmID componentsSeparatedByString:@","];
-    NSArray *serverID  = [aPhoto.serverID componentsSeparatedByString:@","];
-    NSArray *photosIDs = [aPhoto.photoID componentsSeparatedByString:@","];
-    NSArray *secret    = [aPhoto.secret componentsSeparatedByString:@","];
+    NSString *farmID    = [NSString stringWithFormat:@"%@",aPhoto.farmID];
+    NSString *serverID  = [NSString stringWithFormat:@"%@",aPhoto.serverID];
+    NSString *photosIDs = [NSString stringWithFormat:@"%@",aPhoto.photoID];
+    NSString *secret    = [NSString stringWithFormat:@"%@",aPhoto.secret];
     
-    NSString *photoURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",farmID[indexPath.row],serverID[indexPath.row],photosIDs[indexPath.row],secret[indexPath.row]];
+    NSString *photoURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",farmID,serverID,photosIDs,secret];
     NSLog(@"------%@",photoURL);
     return photoURL;
 }
