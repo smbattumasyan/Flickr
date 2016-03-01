@@ -26,14 +26,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.photoNameLabel.text   = [self.aPhoto photoName];
-    self.dateLabel.text        = [NSDateFormatter localizedStringFromDate:self.aPhoto.photoDate dateStyle:NSDateFormatterShortStyle timeStyle:
-                           NSDateFormatterShortStyle];
-    NSLog(@"%@",self.aPhoto.photoDate);
-    self.descriptionLabel.text = [self.aPhoto photoDescription];
-
+    [self updateSelectedPhoto:[self.flikrFeedDataController loadPhoto:self.selectedIndexPath]];
     [self setFlikrImageView:self.flikrImageView];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -49,6 +46,41 @@
     flikrImageView.layer.cornerRadius  = 10;
     flikrImageView.layer.masksToBounds = YES;
 }
+
+- (NSDate *)setPhotoDateFormat:(NSString *)dateString
+{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *photoDate = [dateFormat dateFromString:[NSString stringWithFormat:@"%@",dateString]];
+    
+    return photoDate;
+}
+
+- (Photo *)savePhotoNewData:(Photo *)aPhoto data:(NSData *)data
+{
+    NSDictionary *imageJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    [aPhoto setValue:[imageJson valueForKeyPath:@"photo.description._content"] forKey:@"photoDescription"];
+    [aPhoto setValue:[self setPhotoDateFormat:[imageJson valueForKeyPath: @"photo.dates.taken"]] forKey:@"photoDate"];
+    [self.flikrFeedDataController.coreDataManager saveContext];
+    
+    return [self.flikrFeedDataController loadPhoto:self.selectedIndexPath];
+}
+
+- (void)updateSelectedPhoto:(Photo *)aPhoto
+{
+    [self.flikrFeedDataController.service imageRequest:aPhoto.photoID completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self setupIBOutelts:[self savePhotoNewData:aPhoto data:data]];
+        });
+    }];
+}
+
+- (void)setupIBOutelts:(Photo *)aPhoto {
+    self.photoNameLabel.text   = [aPhoto photoName];
+    self.descriptionLabel.text = aPhoto.photoDescription;
+    self.dateLabel.text        = [NSDateFormatter localizedStringFromDate:aPhoto.photoDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+}
+
 
 /*
 #pragma mark - Navigation

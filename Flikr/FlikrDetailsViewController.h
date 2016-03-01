@@ -11,8 +11,8 @@
 
 @interface FlikrDetailsViewController : UIViewController
 
-@property(strong, nonatomic) Photo *aPhoto;
-
+@property (strong, nonatomic) FlikrFeedDataController *flikrFeedDataController;
 @property (strong, nonatomic) UIImageView *flikrImage;
+@property (strong, nonatomic) NSIndexPath *selectedIndexPath;
 
 @end

@@ -1,0 +1,91 @@
+{
+	"photo": {
+		"description": {
+			"_content": "Lovely description of a nice picture you can see here. Lovely description of a nice picture you can see here. Lovely description of a nice picture you can see here Lovely description of a nice picture you can see here."
+		},
+		"server": "1607",
+		"secret": "8d53dbe7cf",
+		"rotation": 0,
+		"originalformat": "jpg",
+		"title": {
+			"_content": "My Lovely City"
+		},
+		"tags": {
+			"tag": [{
+				"raw": "#nature",
+				"id": "138425323-24451560974-791",
+				"author": "138446653@N07",
+				"authorname": "smbattumasyan",
+				"machine_tag": 0,
+				"_content": "nature"
+			}, {
+				"raw": "#beauty",
+				"id": "138425323-24451560974-881",
+				"author": "138446653@N07",
+				"authorname": "smbattumasyan",
+				"machine_tag": 0,
+				"_content": "beauty"
+			}]
+		},
+		"owner": {
+			"location": "",
+			"nsid": "138446653@N07",
+			"path_alias": null,
+			"iconfarm": 0,
+			"username": "smbattumasyan",
+			"realname": "Smbat Tumasyan",
+			"iconserver": "0"
+		},
+		"originalsecret": "97cb3ed642",
+		"editability": {
+			"canaddmeta": 0,
+			"cancomment": 0
+		},
+		"safety_level": "0",
+		"visibility": {
+			"ispublic": 1,
+			"isfriend": 0,
+			"isfamily": 0
+		},
+		"views": "0",
+		"publiceditability": {
+			"canaddmeta": 0,
+			"cancomment": 1
+		},
+		"media": "photo",
+		"farm": 2,
+		"id": "24451560974",
+		"dates": {
+			"lastupdate": "1455715238",
+			"posted": "1455694699",
+			"takengranularity": "0",
+			"taken": "2013-01-02 01:01:01",
+			"takenunknown": "0"
+		},
+		"usage": {
+			"canprint": 0,
+			"canblog": 0,
+			"canshare": 1,
+			"candownload": 1
+		},
+		"urls": {
+			"url": [{
+				"type": "photopage",
+				"_content": "https:\/\/www.flickr.com\/photos\/138446653@N07\/24451560974\/"
+			}]
+		},
+		"comments": {
+			"_content": "0"
+		},
+		"notes": {
+			"note": []
+		},
+		"license": "0",
+		"dateuploaded": "1455694699",
+		"people": {
+			"haspeople": 0
+		},
+		"isfavorite": 0
+	},
+	"stat": "ok"
+}

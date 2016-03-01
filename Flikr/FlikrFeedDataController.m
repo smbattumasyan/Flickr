@@ -29,10 +29,7 @@
 //------------------------------------------------------------------------------------------
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSArray *photos    = [[self.photoManager fetchedResultsController] fetchedObjects];
-    Photo *aPhoto      = [photos lastObject];
-    NSArray *photoID    = [aPhoto.photoID componentsSeparatedByString:@","];
-    return photoID.count;
+    return [[self.photoManager.fetchedResultsController fetchedObjects] count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -45,6 +42,7 @@
         
         NSURL *url         = [NSURL URLWithString:[self loadPhotoURL:indexPath]];
         NSLog(@"__indexPath:(%ld) photourl:(%@)",(long)indexPath.row, [self loadPhotoURL:indexPath]);
+        cell.backgroundView = nil;
         cell.backgroundColor   = [UIColor grayColor];
         NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
 
@@ -112,7 +110,6 @@
 
 - (UIImageView *)setPhotos:(NSIndexPath *)indexPath
 {
-//    Photo *aPhoto      = [[self.photoManager fetchedResultsController] objectAtIndexPath:indexPath];
     NSString *photoURL = [self loadPhotoURL:indexPath];
     NSURL *url   = [NSURL URLWithString:photoURL];
     NSData *data = [NSData dataWithContentsOfURL:url];
@@ -121,37 +118,16 @@
     return [[UIImageView alloc ] initWithImage:img];
 }
 
-- (void)savePhotos
+- (void)loadPhotos
 {
     [self.service imagesRequest:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSDictionary *imageJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        [self.photoManager addPhoto:[imageJson valueForKeyPath:@"photos.photo"]];
+        [self.photoManager addPhoto:imageJson];
         
-        for (NSDictionary *aPhoto in [imageJson valueForKeyPath:@"photos.photo"]) {
-            [self.photoManager addPhoto:aPhoto];
-        }
-        
-        [self.coreDataManager saveContext];
-//        NSDictionary *dict = @{@"name":@"anun", @"names":@[@{@"photoID":@"123456"}, @{@"photoID": @"654132"}]};
-//        NSLog(@"%@",[dict valueForKeyPath:@"names.photoID"]);
-//        if ([[dict valueForKeyPath:@"names.photoID"] isKindOfClass:[NSArray class]]) {
-//            NSLog(@"yes");
-//        } else NSLog(@"no");
-        
-//        NSLog(@"ImageJson:%@",imageJson);
-        
-//        NSArray *photos = [imageJson valueForKeyPath:@"photos.photo"];
-//        for (NSDictionary *dict in photos) {
-//            [self.photoManager addPhoto:dict];
-//        }
-//
-//        NSDictionary *addressesDict = @{@"head":@"head",@"new":@"new", @"home" : @[@{@"cc":@"dd", @"gg":@"hh"},@{@"cc":@"ff",@"ii":@"jj",@"qq":@"ll"}]};
-//        NSLog(@"asdf%@",addressesDict);
-        
-        
-//        NSArray *photosIDs      = [imageJson valueForKeyPath:@"photos.photo.id"];
-//        NSMutableArray *savedPhotos;
-//        savedPhotos = [[self.photoManager photosRequest] valueForKey:@"photoID"];
+//       
+       
+//        NSArray *savedPhotos;
+//        savedPhotos = [[[self.photoManager fetchedResultsController] fetchedObjects] valueForKey:@"photoID"];
 //        for (NSString *aPhotoID in photosIDs) {
 //            
 //            [savedPhotos containsObject:aPhotoID];
@@ -163,8 +139,8 @@
 //                }];
 //            }
 //        }
-//        savedPhotos = [self.photoManager photosRequest];
-//        
+//        savedPhotos = [[self.photoManager fetchedResultsController] fetchedObjects];
+//
 //        for (Photo *aSavedPhotoID in savedPhotos) {
 //            if (![photosIDs containsObject:aSavedPhotoID.photoID]) {
 //                [self.photoManager deletePhoto:aSavedPhotoID];
@@ -175,16 +151,16 @@
 
 - (NSString *)loadPhotoURL:(NSIndexPath *)indexPath
 {
-    Photo *aPhoto    = [[self.photoManager fetchedResultsController] objectAtIndexPath:indexPath];
-
-    NSString *farmID    = [NSString stringWithFormat:@"%@",aPhoto.farmID];
-    NSString *serverID  = [NSString stringWithFormat:@"%@",aPhoto.serverID];
-    NSString *photosIDs = [NSString stringWithFormat:@"%@",aPhoto.photoID];
-    NSString *secret    = [NSString stringWithFormat:@"%@",aPhoto.secret];
-    
-    NSString *photoURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",farmID,serverID,photosIDs,secret];
+    Photo *aPhoto    = [self loadPhoto:indexPath];
+    NSString *photoURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",aPhoto.farmID,aPhoto.serverID,aPhoto.photoID,aPhoto.secret];
     NSLog(@"------%@",photoURL);
     return photoURL;
+}
+
+- (Photo *)loadPhoto:(NSIndexPath *)indexPath
+{
+    Photo *aPhoto = [[self.photoManager fetchedResultsController] objectAtIndexPath:indexPath];
+    return aPhoto;
 }
 
 - (void)initFetchResultControler

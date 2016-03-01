@@ -10,6 +10,7 @@
 #import "FlikrWebService.h"
 #import "PhotoManager.h"
 #import "FlikrWebService.h"
+#import "FlikrMockService.h"
 #import "FlikrDetailsViewController.h"
 
 @interface FlikrFeedViewController ()< UICollectionViewDelegate>
@@ -34,7 +35,7 @@
 
     [self setupCollectionView];
     [self.flikrFeedDataController initFetchResultControler];
-    [self.flikrFeedDataController savePhotos];
+    [self.flikrFeedDataController loadPhotos];
     [self.navigationController.navigationBar setBackgroundColor:[UIColor orangeColor]];
 }
 
@@ -71,7 +72,7 @@
 //------------------------------------------------------------------------------------------
 
 - (IBAction)updateButtonAction:(UIBarButtonItem *)sender {
-    [self.flikrFeedDataController savePhotos];
+    [self.flikrFeedDataController loadPhotos];
 }
 
 
@@ -90,18 +91,22 @@
     self.flikrFeedDataController.collectionView = self.collectionView;
 }
 
+- (NSIndexPath *)selectedIndexPath
+{
+    NSArray *selectedIndexPathArray = [self.collectionView indexPathsForSelectedItems];
+    return selectedIndexPathArray[0];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    NSArray *selectedIndexPathArray = [self.collectionView indexPathsForSelectedItems];
-    NSIndexPath *selectedIndexPath  = selectedIndexPathArray[0];
-//    Photo *photoParameter = [self.flikrFeedDataController.photoManager.fetchedResultsController objectAtIndexPath:selectedIndexPath];
+
     if ([segue.identifier isEqualToString:@"FlikrFeedViewController"]) {
         FlikrDetailsViewController *flikrDetailsVC = [segue destinationViewController];
-        flikrDetailsVC.flikrImage = [self.flikrFeedDataController setPhotos:selectedIndexPath];
-//        flikrDetailsVC.aPhoto     = photoParameter;
+        flikrDetailsVC.flikrImage = [self.flikrFeedDataController setPhotos:[self selectedIndexPath]];
+        flikrDetailsVC.selectedIndexPath = [self selectedIndexPath];
+        flikrDetailsVC.flikrFeedDataController = self.flikrFeedDataController;
     }
 }
 

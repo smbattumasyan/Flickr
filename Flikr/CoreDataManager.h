@@ -12,8 +12,8 @@
 @interface CoreDataManager : NSObject
 
 #pragma mark - Properties
-@property (nullable, readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (nullable, readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
+@property (nullable, readonly, strong, nonatomic) NSManagedObjectContext       *managedObjectContext;
+@property (nullable, readonly, strong, nonatomic) NSManagedObjectModel         *managedObjectModel;
 @property (nullable, readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 #pragma mark - Class Methods

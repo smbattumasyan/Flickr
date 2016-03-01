@@ -159,12 +159,11 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5uJ-Jy-vaz">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5uJ-Jy-vaz">
                                 <rect key="frame" x="20" y="358" width="280" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Dg8-8D-uMw"/>
                                 </constraints>
-                                <string key="text">Lovely Description of a nice picture you can see here. Lovely description of a nice picture you can see here. Lovely description of a nice picture yoiu can see here. Lovely description of a nice picture you can see here.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>

@@ -1,0 +1,30 @@
+{
+	"photos": {
+		"pages": 1,
+		"total": "2",
+		"page": 1,
+		"photo": [{
+			"secret": "8d53dbe7cf",
+			"id": "24451560974",
+			"server": "1607",
+			"farm": 2,
+			"owner": "138446653@N07",
+			"ispublic": 1,
+			"isfriend": 0,
+			"isfamily": 0,
+			"title": "Free-Wallpaper-Nature-Scenes_Gg92QQ8"
+		}, {
+			"secret": "cd8afa2428",
+			"id": "25060957505",
+			"server": "1490",
+			"farm": 2,
+			"owner": "138446653@N07",
+			"ispublic": 1,
+			"isfriend": 0,
+			"isfamily": 0,
+			"title": "Beauty-of-nature-random-4884759-1280-800_nqwrrog"
+		}],
+		"perpage": 100
+	},
+	"stat": "ok"
+}

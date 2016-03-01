@@ -14,26 +14,22 @@
 #pragma mark - Class Methods
 //------------------------------------------------------------------------------------------
 
-- (NSMutableArray<Photo *> *)photosRequest {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Photo"];
-    return [[self.coreDataManager.managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
-}
-
-- (void)addPhoto:(nullable NSDictionary *)photo
+- (void)addPhoto:(nullable NSDictionary *)jsonDict
 {
-    Photo *aPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:self.coreDataManager.managedObjectContext];
-//    NSDictionary *photoName = [photo valueForKey:@"title"];
-    NSDictionary *photoDescription = [photo valueForKey:@"description"];
-    NSDictionary *dates = [photo valueForKey:@"dates"];
-    
-    aPhoto.farmID           = [NSString stringWithFormat:@"%@",[photo valueForKeyPath:@"farm"]];
-    aPhoto.serverID         = [NSString stringWithFormat:@"%@",[photo valueForKeyPath:@"server"]];
-    aPhoto.photoID          = [NSString stringWithFormat:@"%@",[photo valueForKeyPath:@"id"]];
-    aPhoto.secret           = [NSString stringWithFormat:@"%@",[photo valueForKeyPath:@"secret"]];
-    aPhoto.photoName        = [NSString stringWithFormat:@"%@",[photo valueForKey:@"title"]];
-    aPhoto.photoDate        = [self setPhotoDateFormat:[NSString stringWithFormat:@"%@",[dates valueForKey:@"taken"]]];
-
-    aPhoto.photoDescription = [NSString stringWithFormat:@"%@",[photoDescription valueForKey:@"_content"]];
+    for (NSDictionary *photo in [jsonDict valueForKeyPath:@"photos.photo"]) {
+        Photo *aPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:self.coreDataManager.managedObjectContext];
+        
+        NSDictionary *photoDescription = [photo valueForKey:@"description"];
+        NSDictionary *dates = [photo valueForKey:@"dates"];
+        aPhoto.farmID           = [NSString stringWithFormat:@"%@",[photo valueForKeyPath:@"farm"]];
+        aPhoto.serverID         = [NSString stringWithFormat:@"%@",[photo valueForKeyPath:@"server"]];
+        aPhoto.photoID          = [NSString stringWithFormat:@"%@",[photo valueForKeyPath:@"id"]];
+        aPhoto.secret           = [NSString stringWithFormat:@"%@",[photo valueForKeyPath:@"secret"]];
+        aPhoto.photoName        = [NSString stringWithFormat:@"%@",[photo valueForKey:@"title"]];
+        aPhoto.photoDate        = [self setPhotoDateFormat:[NSString stringWithFormat:@"%@",[dates valueForKey:@"taken"]]];
+        aPhoto.photoDescription = [NSString stringWithFormat:@"%@",[photoDescription valueForKey:@"_content"]];
+    }
+    [self.coreDataManager saveContext];
 }
 
 - (NSDate *)setPhotoDateFormat:(NSString *)dateString

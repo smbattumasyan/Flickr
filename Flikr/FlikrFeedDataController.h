@@ -19,9 +19,10 @@
 @property (strong, nonatomic) UICollectionView *collectionView;
 
 #pragma mark - Class Methods
-- (void)savePhotos;
+- (void)loadPhotos;
 + (instancetype)createInstance;
 - (void)initFetchResultControler;
 - (UIImageView *)setPhotos:(NSIndexPath *)indexPath;
+- (Photo *)loadPhoto:(NSIndexPath *)indexPath;
 
 @end

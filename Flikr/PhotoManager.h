@@ -19,7 +19,6 @@
 
 #pragma mark - Instance Methods
 
-- (nullable NSMutableArray<Photo *> *)photosRequest;
 - (void)addPhoto:(nullable NSDictionary *)photo;
 - (void)deletePhoto:(nonnull Photo *)managedObject;
 
