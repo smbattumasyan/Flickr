@@ -18,7 +18,7 @@
 - (void)imagesRequest:(void (^)(NSData * _Nullable, NSURLResponse * _Nullable, NSError * _Nullable))completionHandler
 {
     NSURLSession *session          = [NSURLSession sharedSession];
-    NSString *urlString            = @"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=95af4a51f0599f265c57ad923e285e7e&user_id=138446653%40N07&format=json&nojsoncallback=1";
+    NSString *urlString            = @"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=95af4a51f0599f265c57ad923e285e7e&tags=cat&format=json&nojsoncallback=1";
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:completionHandler];
     [dataTask resume];
 }
