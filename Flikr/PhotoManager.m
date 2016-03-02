@@ -14,7 +14,7 @@
 #pragma mark - Class Methods
 //------------------------------------------------------------------------------------------
 
-- (void)addPhoto:(nullable NSDictionary *)jsonDict
+- (void)addPhoto:(nullable NSArray *)jsonDict
 {
     for (NSDictionary *photo in jsonDict) {
         Photo *aPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:self.coreDataManager.managedObjectContext];
