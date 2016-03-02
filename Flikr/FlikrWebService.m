@@ -18,7 +18,7 @@
 - (void)imagesRequest:(void (^)(NSData * _Nullable, NSURLResponse * _Nullable, NSError * _Nullable))completionHandler
 {
     NSURLSession *session          = [NSURLSession sharedSession];
-    NSString *urlString            = @"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=88569b3c55687dd564daf5dca5234002&tags=cat&format=json&nojsoncallback=1";
+    NSString *urlString            = @"https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=1f70ef11b7bc2f5c2c657395aae33c76&tags=car&format=json&nojsoncallback=1";
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:completionHandler];
     [dataTask resume];
 }
@@ -26,7 +26,7 @@
 - (void)imageRequest:(NSString*)photoID completionHandler:(void (^)(NSData * _Nullable, NSURLResponse * _Nullable, NSError * _Nullable))completionHandler
 {
     NSURLSession *session          = [NSURLSession sharedSession];
-    NSString *urlString = [NSString stringWithFormat:@"https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=88569b3c55687dd564daf5dca5234002&photo_id=%@&format=json&nojsoncallback=1",photoID];
+    NSString *urlString = [NSString stringWithFormat:@"https://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=1f70ef11b7bc2f5c2c657395aae33c76&photo_id=%@&format=json&nojsoncallback=1",photoID];
     NSURLSessionDataTask *dataTask = [session dataTaskWithURL:[NSURL URLWithString:urlString] completionHandler:completionHandler];
     [dataTask resume];
 }

@@ -16,7 +16,7 @@
 
 - (void)addPhoto:(nullable NSDictionary *)jsonDict
 {
-    for (NSDictionary *photo in [jsonDict valueForKeyPath:@"photos.photo"]) {
+    for (NSDictionary *photo in jsonDict) {
         Photo *aPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:self.coreDataManager.managedObjectContext];
         
         NSDictionary *photoDescription = [photo valueForKey:@"description"];
@@ -40,9 +40,11 @@
     return photoDate;
 }
 
-- (void)deletePhoto:(Photo *)managedObject
+- (void)deletePhoto:(NSArray *)photos
 {
-    [self.coreDataManager.managedObjectContext deleteObject:managedObject];
+    for (Photo *aPhoto in photos) {
+        [self.coreDataManager.managedObjectContext deleteObject:aPhoto];
+    }
     [self.coreDataManager saveContext];
 }
 

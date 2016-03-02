@@ -11,6 +11,9 @@
 
 @interface FlikrFeedDataController ()
 
+@property NSMutableArray *sectionChanges;
+@property NSMutableArray *itemChanges;
+
 @end
 
 @implementation FlikrFeedDataController
@@ -103,7 +106,6 @@
     [self.collectionView reloadData];
 }
 
-
 //------------------------------------------------------------------------------------------
 #pragma mark Private Methods
 //------------------------------------------------------------------------------------------
@@ -122,30 +124,28 @@
 {
     [self.service imagesRequest:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSDictionary *imageJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        [self.photoManager addPhoto:imageJson];
+        NSMutableArray *photos      = [[imageJson valueForKeyPath:@"photos.photo.id"] mutableCopy];
+        NSMutableArray *savedPhotos = [[[self.photoManager fetchedResultsController] fetchedObjects] mutableCopy];
         
-//       
-       
-//        NSArray *savedPhotos;
-//        savedPhotos = [[[self.photoManager fetchedResultsController] fetchedObjects] valueForKey:@"photoID"];
-//        for (NSString *aPhotoID in photosIDs) {
-//            
-//            [savedPhotos containsObject:aPhotoID];
-//
-//            if (![savedPhotos containsObject:aPhotoID]) {
-//                [self.service imageRequest:aPhotoID completionHandler:^(NSData * _Nullable dataImg, NSURLResponse * _Nullable responseImg, NSError * _Nullable errorImg) {
-//                    NSDictionary *aImageJson = [NSJSONSerialization JSONObjectWithData:dataImg options:0 error:nil];
-//                    
-//                }];
-//            }
-//        }
-//        savedPhotos = [[self.photoManager fetchedResultsController] fetchedObjects];
-//
-//        for (Photo *aSavedPhotoID in savedPhotos) {
-//            if (![photosIDs containsObject:aSavedPhotoID.photoID]) {
-//                [self.photoManager deletePhoto:aSavedPhotoID];
-//            }
-//        }
+        for (NSInteger i = savedPhotos.count - 1; i >= 0; i--) {
+            Photo *aPhoto = savedPhotos[i];
+            if ([photos containsObject:aPhoto.photoID]) {
+                [savedPhotos removeObject:aPhoto];
+            }
+        }
+        [self.photoManager deletePhoto:savedPhotos];
+        
+        photos      = [[imageJson valueForKeyPath:@"photos.photo"] mutableCopy];
+        savedPhotos = [[[[self.photoManager fetchedResultsController] fetchedObjects] valueForKey:@"photoID"] mutableCopy];
+        for (NSInteger i = photos.count - 1; i >= 0; i--) {
+            NSDictionary *aPhoto = photos[i];
+            if ([savedPhotos containsObject:[aPhoto valueForKey:@"id"]]) {
+                [photos removeObject:aPhoto];
+            }
+        }
+        
+//        NSLog(@"tosave%@",);
+        [self.photoManager addPhoto:photos];
     }];
 }
 
@@ -167,6 +167,7 @@
 {
     self.photoManager.fetchedResultsController.delegate = self;
 }
+
 
 - (NSString *)jsonStringWithPrettyPrint:(NSDictionary *)dictionary
 {
