@@ -79,7 +79,8 @@
 #pragma mark - NSFetchedResultsControllerDelegate
 //------------------------------------------------------------------------------------------
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
     _sectionChanges = [[NSMutableArray alloc] init];
     _itemChanges    = [[NSMutableArray alloc] init];
 }
@@ -87,7 +88,8 @@
 - (void)controller:(NSFetchedResultsController *)controller
   didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
            atIndex:(NSUInteger)sectionIndex
-     forChangeType:(NSFetchedResultsChangeType)type {
+     forChangeType:(NSFetchedResultsChangeType)type
+{
     NSMutableDictionary *change = [[NSMutableDictionary alloc] init];
     change[@(type)]             = @(sectionIndex);
     [_sectionChanges addObject:change];
@@ -97,7 +99,8 @@
    didChangeObject:(id)anObject
        atIndexPath:(NSIndexPath *)indexPath
      forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath {
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
     NSMutableDictionary *change = [[NSMutableDictionary alloc] init];
     switch(type) {
         case NSFetchedResultsChangeInsert:
@@ -116,7 +119,8 @@
     [_itemChanges addObject:change];
 }
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
     [self.collectionView performBatchUpdates:^{
         for (NSDictionary *change in _sectionChanges) {
             [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
