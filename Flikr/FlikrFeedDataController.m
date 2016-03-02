@@ -11,9 +11,6 @@
 
 @interface FlikrFeedDataController ()
 
-@property NSMutableArray *sectionChanges;
-@property NSMutableArray *itemChanges;
-
 @end
 
 @implementation FlikrFeedDataController
