@@ -11,6 +11,9 @@
 
 @interface FlikrFeedDataController ()
 
+@property NSMutableArray *sectionChanges;
+@property NSMutableArray *itemChanges;
+
 @end
 
 @implementation FlikrFeedDataController
@@ -24,9 +27,11 @@
     FlikrFeedDataController *dataController = [[FlikrFeedDataController alloc] init];
     return dataController;
 }
+
 //------------------------------------------------------------------------------------------
 #pragma mark - CollectionView Data Source
 //------------------------------------------------------------------------------------------
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return [[self.photoManager.fetchedResultsController fetchedObjects] count];
@@ -40,9 +45,9 @@
     dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(queue, ^{
         
-        NSURL *url         = [NSURL URLWithString:[self loadPhotoURL:indexPath]];
+        NSURL *url             = [NSURL URLWithString:[self loadPhotoURL:indexPath]];
         NSLog(@"__indexPath:(%ld) photourl:(%@)",(long)indexPath.row, [self loadPhotoURL:indexPath]);
-        cell.backgroundView = nil;
+        cell.backgroundView    = nil;
         cell.backgroundColor   = [UIColor grayColor];
         NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
 
@@ -70,39 +75,92 @@
     return CGSizeMake(80, 80);
 }
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
-    
+//------------------------------------------------------------------------------------------
+#pragma mark - NSFetchedResultsControllerDelegate
+//------------------------------------------------------------------------------------------
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    _sectionChanges = [[NSMutableArray alloc] init];
+    _itemChanges    = [[NSMutableArray alloc] init];
 }
 
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+- (void)controller:(NSFetchedResultsController *)controller
+  didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex
+     forChangeType:(NSFetchedResultsChangeType)type {
+    NSMutableDictionary *change = [[NSMutableDictionary alloc] init];
+    change[@(type)]             = @(sectionIndex);
+    [_sectionChanges addObject:change];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath {
-    
+    NSMutableDictionary *change = [[NSMutableDictionary alloc] init];
     switch(type) {
-            
         case NSFetchedResultsChangeInsert:
-//            [self.collectionView insertItemsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]];
+            change[@(type)] = newIndexPath;
             break;
-            
         case NSFetchedResultsChangeDelete:
-//            [self.collectionView deleteItemsAtIndexPaths:[NSArray arrayWithObject:indexPath]];
+            change[@(type)] = indexPath;
             break;
-            
         case NSFetchedResultsChangeUpdate:
-            [self.collectionView reloadData];
+            change[@(type)] = indexPath;
             break;
-            
         case NSFetchedResultsChangeMove:
-            
+            change[@(type)] = @[indexPath, newIndexPath];
             break;
     }
-}
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    [self.collectionView reloadData];
+    [_itemChanges addObject:change];
 }
 
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.collectionView performBatchUpdates:^{
+        for (NSDictionary *change in _sectionChanges) {
+            [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                NSFetchedResultsChangeType type = [key unsignedIntegerValue];
+                switch(type) {
+                    case NSFetchedResultsChangeInsert:
+                        [self.collectionView insertSections:[NSIndexSet indexSetWithIndex:[obj unsignedIntegerValue]]];
+                        break;
+                    case NSFetchedResultsChangeDelete:
+                        [self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:[obj unsignedIntegerValue]]];
+                        break;
+                    case NSFetchedResultsChangeUpdate:
+                        
+                        break;
+                    case NSFetchedResultsChangeMove:
+                        
+                        break;
+                }
+            }];
+        }
+        for (NSDictionary *change in _itemChanges) {
+            [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+                NSFetchedResultsChangeType type = [key unsignedIntegerValue];
+                switch(type) {
+                    case NSFetchedResultsChangeInsert:
+                        [self.collectionView insertItemsAtIndexPaths:@[obj]];
+                        break;
+                    case NSFetchedResultsChangeDelete:
+                        [self.collectionView deleteItemsAtIndexPaths:@[obj]];
+                        break;
+                    case NSFetchedResultsChangeUpdate:
+                        [self.collectionView reloadItemsAtIndexPaths:@[obj]];
+                        break;
+                    case NSFetchedResultsChangeMove:
+                        [self.collectionView moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
+                        break;
+                }
+            }];
+        }
+    } completion:^(BOOL finished) {
+        _sectionChanges = nil;
+        _itemChanges    = nil;
+    }];
+}
 //------------------------------------------------------------------------------------------
 #pragma mark Private Methods
 //------------------------------------------------------------------------------------------
@@ -110,9 +168,9 @@
 - (UIImageView *)setPhotos:(NSIndexPath *)indexPath
 {
     NSString *photoURL = [self loadPhotoURL:indexPath];
-    NSURL *url   = [NSURL URLWithString:photoURL];
-    NSData *data = [NSData dataWithContentsOfURL:url];
-    UIImage *img = [[UIImage alloc] initWithData:data];
+    NSURL *url         = [NSURL URLWithString:photoURL];
+    NSData *data       = [NSData dataWithContentsOfURL:url];
+    UIImage *img       = [[UIImage alloc] initWithData:data];
 
     return [[UIImageView alloc ] initWithImage:img];
 }
@@ -120,7 +178,7 @@
 - (void)loadPhotos
 {
     [self.service imagesRequest:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        NSDictionary *imageJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        NSDictionary *imageJson     = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
         NSMutableArray *photos      = [[imageJson valueForKeyPath:@"photos.photo.id"] mutableCopy];
         NSMutableArray *savedPhotos = [[[self.photoManager fetchedResultsController] fetchedObjects] mutableCopy];
         
@@ -141,14 +199,13 @@
             }
         }
         
-//        NSLog(@"tosave%@",);
         [self.photoManager addPhoto:photos];
     }];
 }
 
 - (NSString *)loadPhotoURL:(NSIndexPath *)indexPath
 {
-    Photo *aPhoto    = [self loadPhoto:indexPath];
+    Photo *aPhoto      = [self loadPhoto:indexPath];
     NSString *photoURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",aPhoto.farmID,aPhoto.serverID,aPhoto.photoID,aPhoto.secret];
     NSLog(@"------%@",photoURL);
     return photoURL;
@@ -164,7 +221,6 @@
 {
     self.photoManager.fetchedResultsController.delegate = self;
 }
-
 
 - (NSString *)jsonStringWithPrettyPrint:(NSDictionary *)dictionary
 {

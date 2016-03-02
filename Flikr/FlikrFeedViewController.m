@@ -71,10 +71,10 @@
 #pragma mark - View IBOutlets Action
 //------------------------------------------------------------------------------------------
 
-- (IBAction)updateButtonAction:(UIBarButtonItem *)sender {
+- (IBAction)updateButtonAction:(UIBarButtonItem *)sender
+{
     [self.flikrFeedDataController loadPhotos];
 }
-
 
 //------------------------------------------------------------------------------------------
 #pragma mark Private Methods
@@ -97,10 +97,13 @@
     return selectedIndexPathArray[0];
 }
 
+//------------------------------------------------------------------------------------------
 #pragma mark - Navigation
+//------------------------------------------------------------------------------------------
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
 
     if ([segue.identifier isEqualToString:@"FlikrFeedViewController"]) {
         FlikrDetailsViewController *flikrDetailsVC = [segue destinationViewController];

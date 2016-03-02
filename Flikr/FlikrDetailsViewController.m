@@ -11,9 +11,9 @@
 @interface FlikrDetailsViewController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *flikrImageView;
-@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
-@property (weak, nonatomic) IBOutlet UILabel *photoNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel     *descriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel     *photoNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel     *dateLabel;
 
 @end
 
@@ -41,7 +41,8 @@
 #pragma mark Private Methods
 //------------------------------------------------------------------------------------------
 
-- (void)setFlikrImageView:(UIImageView *)flikrImageView {
+- (void)setFlikrImageView:(UIImageView *)flikrImageView
+{
     flikrImageView.image               = self.flikrImage.image;
     flikrImageView.layer.cornerRadius  = 10;
     flikrImageView.layer.masksToBounds = YES;
@@ -51,7 +52,7 @@
 {
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *photoDate = [dateFormat dateFromString:[NSString stringWithFormat:@"%@",dateString]];
+    NSDate *photoDate           = [dateFormat dateFromString:[NSString stringWithFormat:@"%@",dateString]];
     
     return photoDate;
 }
@@ -75,7 +76,8 @@
     }];
 }
 
-- (void)setupIBOutelts:(Photo *)aPhoto {
+- (void)setupIBOutelts:(Photo *)aPhoto
+{
     self.photoNameLabel.text   = [aPhoto photoName];
     self.descriptionLabel.text = aPhoto.photoDescription;
     self.dateLabel.text        = [NSDateFormatter localizedStringFromDate:aPhoto.photoDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];

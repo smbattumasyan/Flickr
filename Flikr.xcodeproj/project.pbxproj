@@ -179,13 +179,6 @@
 				80C52EDF1C6DD44600519A00 /* Controller */,
 				80C52EA91C6DD1FE00519A00 /* AppDelegate.h */,
 				80C52EAA1C6DD1FE00519A00 /* AppDelegate.m */,
-				80C52EAF1C6DD1FE00519A00 /* Main.storyboard */,
-				80C52EB51C6DD1FE00519A00 /* Assets.xcassets */,
-				80C52EB71C6DD1FE00519A00 /* LaunchScreen.storyboard */,
-				80C52EBA1C6DD1FE00519A00 /* Info.plist */,
-				80C52EB21C6DD1FE00519A00 /* Flikr.xcdatamodeld */,
-				80DCB1241C85B79200EF76C1 /* FlikrPhoto.json */,
-				80DCB1251C85B79200EF76C1 /* FlikrPhotos.json */,
 				80C52EA61C6DD1FE00519A00 /* Supporting Files */,
 			);
 			path = Flikr;
@@ -194,6 +187,13 @@
 		80C52EA61C6DD1FE00519A00 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				80C52EAF1C6DD1FE00519A00 /* Main.storyboard */,
+				80C52EB51C6DD1FE00519A00 /* Assets.xcassets */,
+				80C52EB71C6DD1FE00519A00 /* LaunchScreen.storyboard */,
+				80C52EBA1C6DD1FE00519A00 /* Info.plist */,
+				80C52EB21C6DD1FE00519A00 /* Flikr.xcdatamodeld */,
+				80DCB1241C85B79200EF76C1 /* FlikrPhoto.json */,
+				80DCB1251C85B79200EF76C1 /* FlikrPhotos.json */,
 				80C52EA71C6DD1FE00519A00 /* main.m */,
 			);
 			name = "Supporting Files";

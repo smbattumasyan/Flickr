@@ -36,7 +36,7 @@
 {
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *photoDate = [dateFormat dateFromString:[NSString stringWithFormat:@"%@",dateString]];
+    NSDate *photoDate           = [dateFormat dateFromString:[NSString stringWithFormat:@"%@",dateString]];
     return photoDate;
 }
 
@@ -67,6 +67,5 @@
     }
     return _fetchedResultsController;
 }
-
 
 @end

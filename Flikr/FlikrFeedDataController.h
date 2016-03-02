@@ -13,10 +13,10 @@
 @interface FlikrFeedDataController : NSObject <UICollectionViewDataSource, NSFetchedResultsControllerDelegate>
 
 #pragma mark - Propertes
-@property (strong, nonatomic)  id<FlikrServiceProtocol>service;
-@property (strong, nonatomic) CoreDataManager *coreDataManager;
-@property (strong, nonatomic) PhotoManager *photoManager;
-@property (strong, nonatomic) UICollectionView *collectionView;
+@property (strong, nonatomic) id<FlikrServiceProtocol> service;
+@property (strong, nonatomic) CoreDataManager      *coreDataManager;
+@property (strong, nonatomic) PhotoManager         *photoManager;
+@property (strong, nonatomic) UICollectionView     *collectionView;
 
 #pragma mark - Class Methods
 - (void)loadPhotos;
