@@ -19,7 +19,7 @@
 
 #pragma mark - Instance Methods
 
-- (void)addPhoto:(nullable NSArray *)photo;
+- (void)addPhotos:(nullable NSArray *)photo;
 - (void)deletePhoto:(nullable NSArray *)photos;
 
 @end

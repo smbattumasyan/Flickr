@@ -11,6 +11,9 @@
 
 @interface FlikrFeedDataController ()
 
+//------------------------------------------------------------------------------------------
+#pragma mark - Properties
+//------------------------------------------------------------------------------------------
 @property NSMutableArray *sectionChanges;
 @property NSMutableArray *itemChanges;
 
@@ -204,8 +207,9 @@
             }
         }
         
-        [self.photoManager addPhoto:photos];
-    }];
+        [self.photoManager addPhotos:photos];
+        [self.photoManager.coreDataManager saveContext];
+    }]; 
 }
 
 - (NSString *)loadPhotoURL:(NSIndexPath *)indexPath

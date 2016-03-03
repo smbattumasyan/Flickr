@@ -14,7 +14,7 @@
 #pragma mark - Class Methods
 //------------------------------------------------------------------------------------------
 
-- (void)addPhoto:(nullable NSArray *)jsonDict
+- (void)addPhotos:(nullable NSArray *)jsonDict
 {
     for (NSDictionary *photo in jsonDict) {
         Photo *aPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:self.coreDataManager.managedObjectContext];
@@ -29,7 +29,6 @@
         aPhoto.photoDate        = [self setPhotoDateFormat:[NSString stringWithFormat:@"%@",[dates valueForKey:@"taken"]]];
         aPhoto.photoDescription = [NSString stringWithFormat:@"%@",[photoDescription valueForKey:@"_content"]];
     }
-    [self.coreDataManager saveContext];
 }
 
 - (NSDate *)setPhotoDateFormat:(NSString *)dateString
@@ -45,7 +44,6 @@
     for (Photo *aPhoto in photos) {
         [self.coreDataManager.managedObjectContext deleteObject:aPhoto];
     }
-    [self.coreDataManager saveContext];
 }
 
 - (NSFetchedResultsController *)fetchedResultsController

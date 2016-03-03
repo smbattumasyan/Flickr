@@ -10,6 +10,10 @@
 
 @interface FlikrDetailsViewController ()
 
+//------------------------------------------------------------------------------------------
+#pragma mark - IBOutlets
+//------------------------------------------------------------------------------------------
+
 @property (weak, nonatomic) IBOutlet UIImageView *flikrImageView;
 @property (weak, nonatomic) IBOutlet UILabel     *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel     *photoNameLabel;
