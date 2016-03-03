@@ -110,8 +110,7 @@
                                 <variation key="heightClass=compact-widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="11" y="98" width="259" height="259"/>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="36" y="116" width="248" height="248"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="Vl3-bO-aap"/>
                                     </mask>
@@ -150,8 +149,7 @@
                                 <variation key="heightClass=compact-widthClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="230" y="75" width="200" height="21"/>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="36" y="69" width="200" height="21"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="2H0-cz-LS6"/>
                                         <include reference="DRU-6o-Lgy"/>
@@ -172,8 +170,7 @@
                                         <exclude reference="Dg8-8D-uMw"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="36" y="372" width="248" height="60"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="Dg8-8D-uMw"/>
                                     </mask>
@@ -210,8 +207,7 @@
                                 <variation key="heightClass=compact-widthClass=regular" ambiguous="YES" misplaced="YES">
                                     <rect key="frame" x="230" y="104" width="200" height="21"/>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="36" y="87" width="200" height="21"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <exclude reference="JkX-C0-4zp"/>
                                         <include reference="esw-Cf-UzW"/>
@@ -221,9 +217,6 @@
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iTA-wC-ohX">
                                 <rect key="frame" x="20" y="426" width="280" height="46"/>
                                 <color key="backgroundColor" red="0.82958152249999995" green="0.82841313289999996" blue="0.84882198949999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="36" y="440" width="248" height="31"/>
-                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -393,6 +386,7 @@
                         <outlet property="descriptionLabel" destination="5uJ-Jy-vaz" id="ZsR-Sr-hfs"/>
                         <outlet property="flikrImageView" destination="k4i-DY-DrZ" id="k9D-Wi-N43"/>
                         <outlet property="photoNameLabel" destination="cLh-Md-f7z" id="G0N-WT-KRz"/>
+                        <outlet property="tagsView" destination="iTA-wC-ohX" id="MP1-Ib-f1S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KYO-Hh-cAJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

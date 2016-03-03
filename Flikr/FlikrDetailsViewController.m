@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel     *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel     *photoNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel     *dateLabel;
+@property (weak, nonatomic) IBOutlet UIView      *tagsView;
 
 @end
 
@@ -23,16 +24,29 @@
 #pragma mark - View Lifecycle
 //------------------------------------------------------------------------------------------
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+    
+    UIView *tagView = [[UIView alloc] initWithFrame: CGRectMake ( 5, 5, 50, 20)];
+    
+    tagView.backgroundColor = [UIColor blackColor];
+    
+    [self.tagsView addSubview:tagView];
+    
+    tagView = [[UIView alloc] initWithFrame: CGRectMake ( 60, 5, 50, 20)];
+    
+    tagView.backgroundColor = [UIColor orangeColor];
+    
+    [self.tagsView addSubview:tagView];
+    
     
     [self updateSelectedPhoto:[self.flikrFeedDataController loadPhoto:self.selectedIndexPath]];
     [self setFlikrImageView:self.flikrImageView];
 }
 
-
-
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -82,7 +96,6 @@
     self.descriptionLabel.text = aPhoto.photoDescription;
     self.dateLabel.text        = [NSDateFormatter localizedStringFromDate:aPhoto.photoDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
 }
-
 
 /*
 #pragma mark - Navigation
