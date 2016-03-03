@@ -28,21 +28,9 @@
 {
     [super viewDidLoad];
     
-    UIView *tagView = [[UIView alloc] initWithFrame: CGRectMake ( 5, 5, 50, 20)];
-    
-    tagView.backgroundColor = [UIColor blackColor];
-    
-    [self.tagsView addSubview:tagView];
-    
-    tagView = [[UIView alloc] initWithFrame: CGRectMake ( 60, 5, 50, 20)];
-    
-    tagView.backgroundColor = [UIColor orangeColor];
-    
-    [self.tagsView addSubview:tagView];
-    
-    
     [self updateSelectedPhoto:[self.flikrFeedDataController loadPhoto:self.selectedIndexPath]];
     [self setFlikrImageView:self.flikrImageView];
+    [self addViewTags:4];
 }
 
 - (void)didReceiveMemoryWarning
@@ -95,6 +83,20 @@
     self.photoNameLabel.text   = [aPhoto photoName];
     self.descriptionLabel.text = aPhoto.photoDescription;
     self.dateLabel.text        = [NSDateFormatter localizedStringFromDate:aPhoto.photoDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+}
+
+- (void)addViewTags:(NSInteger )tags
+{
+    for (int i = 0; i < tags; i++) {
+        UIView *tagView = [[UIView alloc] initWithFrame: CGRectMake ( 5+i*60, 5, 50, 20)];
+        
+        tagView.backgroundColor = [UIColor grayColor];
+        
+        tagView.layer.cornerRadius = 10;
+        tagView.layer.masksToBounds = YES;
+        
+        [self.tagsView addSubview:tagView];
+    }
 }
 
 /*
