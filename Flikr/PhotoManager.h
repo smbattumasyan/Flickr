@@ -21,5 +21,6 @@
 
 - (void)addPhotos:(nullable NSArray *)photo;
 - (void)deletePhoto:(nullable NSArray *)photos;
+- (nullable Photo *)fetchSelectedPhoto:(nullable NSIndexPath *)indexPath;
 
 @end

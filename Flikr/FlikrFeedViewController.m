@@ -53,6 +53,7 @@
 {
     return 18;
 }
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(100, 100);
@@ -98,6 +99,16 @@
     return selectedIndexPathArray[0];
 }
 
+- (void)setupDetailsViewController:(FlikrDetailsViewController *)flikrDetailsVC
+{
+    flikrDetailsVC.flikerDetailsDataController = [FlikrDetailsDataController createInstance];
+    flikrDetailsVC.flikerDetailsDataController.photoManager      = self.flikrFeedDataController.photoManager;
+    flikrDetailsVC.flikerDetailsDataController.photoManager.coreDataManager   = self.flikrFeedDataController.photoManager.coreDataManager;
+    flikrDetailsVC.flikerDetailsDataController.service           = self.flikrFeedDataController.service;
+    flikrDetailsVC.flikerDetailsDataController.aPhoto            = [self.flikrFeedDataController.photoManager fetchSelectedPhoto:[self selectedIndexPath]];
+    flikrDetailsVC.flikerDetailsDataController.selectedIndexPath = [self selectedIndexPath];
+}
+
 //------------------------------------------------------------------------------------------
 #pragma mark - Navigation
 //------------------------------------------------------------------------------------------
@@ -105,12 +116,9 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-
     if ([segue.identifier isEqualToString:@"FlikrFeedViewController"]) {
         FlikrDetailsViewController *flikrDetailsVC = [segue destinationViewController];
-        flikrDetailsVC.flikrImage = [self.flikrFeedDataController setPhotos:[self selectedIndexPath]];
-        flikrDetailsVC.selectedIndexPath = [self selectedIndexPath];
-        flikrDetailsVC.flikrFeedDataController = self.flikrFeedDataController;
+        [self setupDetailsViewController:flikrDetailsVC];
     }
 }
 

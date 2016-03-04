@@ -39,6 +39,11 @@
     return photoDate;
 }
 
+- (Photo *)fetchSelectedPhoto:(NSIndexPath *)indexPath
+{
+    return [[self fetchedResultsController] objectAtIndexPath:indexPath];
+}
+
 - (void)deletePhoto:(NSArray *)photos
 {
     for (Photo *aPhoto in photos) {

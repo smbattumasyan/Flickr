@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		80586DD51C887CA10077C7FD /* FlikrDetailsDataController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80586DD41C887CA10077C7FD /* FlikrDetailsDataController.m */; };
 		8078EDDB1C6DF3DE00D9ACBF /* FlikrWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 8078EDDA1C6DF3DE00D9ACBF /* FlikrWebService.m */; };
 		809E30961C71AB89009C07DC /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 809E30951C71AB89009C07DC /* CoreDataManager.m */; };
 		809E30A61C71AD25009C07DC /* PhotoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 809E30A51C71AD25009C07DC /* PhotoManager.m */; };
@@ -46,6 +47,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		80586DD31C887CA10077C7FD /* FlikrDetailsDataController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlikrDetailsDataController.h; sourceTree = "<group>"; };
+		80586DD41C887CA10077C7FD /* FlikrDetailsDataController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlikrDetailsDataController.m; sourceTree = "<group>"; };
 		8078EDD81C6DF19200D9ACBF /* FlikrService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlikrService.h; sourceTree = "<group>"; };
 		8078EDD91C6DF3DE00D9ACBF /* FlikrWebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlikrWebService.h; sourceTree = "<group>"; };
 		8078EDDA1C6DF3DE00D9ACBF /* FlikrWebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlikrWebService.m; sourceTree = "<group>"; };
@@ -145,6 +148,8 @@
 		809E30B21C735092009C07DC /* FlikrDetailsViewController */ = {
 			isa = PBXGroup;
 			children = (
+				80586DD31C887CA10077C7FD /* FlikrDetailsDataController.h */,
+				80586DD41C887CA10077C7FD /* FlikrDetailsDataController.m */,
 				809E30AF1C735077009C07DC /* FlikrDetailsViewController.h */,
 				809E30B01C735077009C07DC /* FlikrDetailsViewController.m */,
 			);
@@ -383,6 +388,7 @@
 				809E30B11C735077009C07DC /* FlikrDetailsViewController.m in Sources */,
 				809E30961C71AB89009C07DC /* CoreDataManager.m in Sources */,
 				80C52EAB1C6DD1FE00519A00 /* AppDelegate.m in Sources */,
+				80586DD51C887CA10077C7FD /* FlikrDetailsDataController.m in Sources */,
 				80DCB0A31C7F482200EF76C1 /* Photo+CoreDataProperties.m in Sources */,
 				80C52EB41C6DD1FE00519A00 /* Flikr.xcdatamodeld in Sources */,
 				809E30A61C71AD25009C07DC /* PhotoManager.m in Sources */,

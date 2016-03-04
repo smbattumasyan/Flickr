@@ -7,6 +7,8 @@
 //
 
 #import "FlikrDetailsViewController.h"
+#import "FlikrWebService.h"
+#import "FlikrMockService.h"
 
 @interface FlikrDetailsViewController ()
 
@@ -32,9 +34,11 @@
 {
     [super viewDidLoad];
     
-    [self updateSelectedPhoto:[self.flikrFeedDataController loadPhoto:self.selectedIndexPath]];
-    [self setFlikrImageView:self.flikrImageView];
-    [self addViewTags:4];
+    [self setFlikrImageView:[self.flikerDetailsDataController getPhotoFromURL]];
+    [self.flikerDetailsDataController updateSelectedPhoto:self.flikerDetailsDataController.aPhoto updatedPhoto:^(Photo * _Nullable photo) {
+         [self setupIBOutelts:photo];
+    }];
+    [self addViewTags:4];         
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,7 +53,7 @@
 
 - (void)setFlikrImageView:(UIImageView *)flikrImageView
 {
-    flikrImageView.image               = self.flikrImage.image;
+    flikrImageView.image               = [[self.flikerDetailsDataController getPhotoFromURL] image];
     flikrImageView.layer.cornerRadius  = 10;
     flikrImageView.layer.masksToBounds = YES;
 }
@@ -61,25 +65,6 @@
     NSDate *photoDate           = [dateFormat dateFromString:[NSString stringWithFormat:@"%@",dateString]];
     
     return photoDate;
-}
-
-- (Photo *)savePhotoNewData:(Photo *)aPhoto data:(NSData *)data
-{
-    NSDictionary *imageJson = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-    [aPhoto setValue:[imageJson valueForKeyPath:@"photo.description._content"] forKey:@"photoDescription"];
-    [aPhoto setValue:[self setPhotoDateFormat:[imageJson valueForKeyPath: @"photo.dates.taken"]] forKey:@"photoDate"];
-    [self.flikrFeedDataController.coreDataManager saveContext];
-    
-    return [self.flikrFeedDataController loadPhoto:self.selectedIndexPath];
-}
-
-- (void)updateSelectedPhoto:(Photo *)aPhoto
-{
-    [self.flikrFeedDataController.service imageRequest:aPhoto.photoID completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error){
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self setupIBOutelts:[self savePhotoNewData:aPhoto data:data]];
-        });
-    }];
 }
 
 - (void)setupIBOutelts:(Photo *)aPhoto

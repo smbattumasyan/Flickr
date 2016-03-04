@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FlikrFeedDataController.h"
+#import "FlikrDetailsDataController.h"
 
 @interface FlikrDetailsViewController : UIViewController
 
-@property (strong, nonatomic) FlikrFeedDataController *flikrFeedDataController;
-@property (strong, nonatomic) UIImageView             *flikrImage;
-@property (strong, nonatomic) NSIndexPath             *selectedIndexPath;
+
+
+@property (strong, nonatomic) FlikrDetailsDataController *flikerDetailsDataController;
 
 @end
