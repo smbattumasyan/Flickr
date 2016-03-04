@@ -34,7 +34,7 @@
 {
     [super viewDidLoad];
     
-    [self setFlikrImageView:[self.flikerDetailsDataController getPhotoFromURL]];
+    [self setFlikrImageView];
     [self.flikerDetailsDataController updateSelectedPhoto:self.flikerDetailsDataController.aPhoto updatedPhoto:^(Photo * _Nullable photo) {
          [self setupIBOutelts:photo];
     }];
@@ -51,11 +51,12 @@
 #pragma mark Private Methods
 //------------------------------------------------------------------------------------------
 
-- (void)setFlikrImageView:(UIImageView *)flikrImageView
+- (void)setFlikrImageView
 {
-    flikrImageView.image               = [[self.flikerDetailsDataController getPhotoFromURL] image];
-    flikrImageView.layer.cornerRadius  = 10;
-    flikrImageView.layer.masksToBounds = YES;
+    NSLog(@"---|--9-%@",self.flikrImageView);
+    self.flikrImageView.image               = [[self.flikerDetailsDataController getPhotoFromURL] image];
+    self.flikrImageView.layer.cornerRadius  = 10;
+    self.flikrImageView.layer.masksToBounds = YES;
 }
 
 - (NSDate *)setPhotoDateFormat:(NSString *)dateString
@@ -77,14 +78,19 @@
 - (void)addViewTags:(NSInteger )tags
 {
     for (int i = 0; i < tags; i++) {
-        UIView *tagView = [[UIView alloc] initWithFrame: CGRectMake ( 5+i*60, 5, 50, 20)];
+        UILabel *tagLabel = [[UILabel alloc] initWithFrame: CGRectMake ( 5+i*60, 5, 50, 20)];
         
-        tagView.backgroundColor = [UIColor grayColor];
+        tagLabel.backgroundColor = [UIColor grayColor];
+        tagLabel.textAlignment = NSTextAlignmentCenter;
         
-        tagView.layer.cornerRadius = 10;
-        tagView.layer.masksToBounds = YES;
+        tagLabel.layer.cornerRadius = 10;
+        tagLabel.layer.masksToBounds = YES;
         
-        [self.tagsView addSubview:tagView];
+        static int i = 1;
+        
+        tagLabel.text = [NSString stringWithFormat:@"tag%i",i++];
+        
+        [self.tagsView addSubview:tagLabel];
     }
 }
 

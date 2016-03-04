@@ -53,7 +53,7 @@
 - (NSString *)loadPhotoURL
 {
     NSString *photoURL = [NSString stringWithFormat:@"https://farm%@.staticflickr.com/%@/%@_%@.jpg",self.aPhoto.farmID,self.aPhoto.serverID,self.aPhoto.photoID,self.aPhoto.secret];
-    NSLog(@"------%@",photoURL);
+    
     return photoURL;
 }
 

@@ -21,7 +21,6 @@
 - (void)loadPhotos;
 + (instancetype)createInstance;
 - (void)initFetchResultControler;
-- (UIImageView *)setPhotos:(NSIndexPath *)indexPath;
 - (NSString *)loadPhotoURL:(NSIndexPath *)indexPath;
 
 @end
