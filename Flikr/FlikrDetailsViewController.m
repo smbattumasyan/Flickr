@@ -38,7 +38,7 @@
     [self.flikerDetailsDataController updateSelectedPhoto:self.flikerDetailsDataController.aPhoto updatedPhoto:^(Photo * _Nullable photo) {
          [self setupIBOutelts:photo];
     }];
-    [self addViewTags:4];         
+    [self addViewTags:10];
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,11 +79,14 @@
 {
     for (int i = 0; i < tags; i++) {
         UILabel *tagLabel = [[UILabel alloc] initWithFrame: CGRectMake ( 5+i*60, 5, 50, 20)];
+        if (tagLabel.frame.origin.x >4*60) {
+            tagLabel = [[UILabel alloc] initWithFrame: CGRectMake ( 5+(-240)+i*60, 5+25, 50, 20)];
+        }
         
-        tagLabel.backgroundColor = [UIColor grayColor];
-        tagLabel.textAlignment = NSTextAlignmentCenter;
-        
-        tagLabel.layer.cornerRadius = 10;
+        tagLabel.backgroundColor     = [UIColor grayColor];
+        tagLabel.textAlignment       = NSTextAlignmentCenter;
+
+        tagLabel.layer.cornerRadius  = 10;
         tagLabel.layer.masksToBounds = YES;
         
         static int i = 1;
