@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel     *photoNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel     *dateLabel;
 //@property (weak, nonatomic) IBOutlet UIView      *tagsView;
+@property (strong, nonatomic) NSNumber *textSize;
 
 @property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 
@@ -36,14 +37,12 @@
 {
     [super viewDidLoad];
     
+    [self setupCollectionView];
     [self.flikerDetailsDataController initFetchResultControler];
     [self setFlikrImageView];
     [self.flikerDetailsDataController updateSelectedPhoto:self.flikerDetailsDataController.aPhoto updatedPhoto:^(Photo * _Nullable photo) {
          [self setupIBOutelts:photo];
     }];
-    
-    self.collectionView.dataSource                  = self.flikerDetailsDataController;
-    self.flikerDetailsDataController.collectionView = self.collectionView;
 //    [self addViewTags:10];
 }
 
@@ -66,8 +65,8 @@
 //                  layout:(UICollectionViewLayout*)collectionViewLayout
 //  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 //{
-//    NSNumber *textSize = [self.flikerDetailsDataController.tagSizes objectAtIndex:indexPath.row];
-//    return CGSizeMake([textSize floatValue], 20.f);
+//    
+//    return CGSizeMake([self.textSize floatValue], 20.f);
 //}
 
 //------------------------------------------------------------------------------------------
@@ -96,6 +95,12 @@
     self.photoNameLabel.text   = [aPhoto photoName];
     self.descriptionLabel.text = aPhoto.photoDescription;
     self.dateLabel.text        = [NSDateFormatter localizedStringFromDate:aPhoto.photoDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
+}
+
+- (void)setupCollectionView
+{
+    self.collectionView.dataSource                  = self.flikerDetailsDataController;
+    self.flikerDetailsDataController.collectionView = self.collectionView;
 }
 
 //- (void)addViewTags:(NSInteger )tags

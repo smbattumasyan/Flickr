@@ -23,6 +23,7 @@
 @property (nullable, strong, nonatomic) id<FlikrServiceProtocol> service;
 @property (nullable, strong, nonatomic) PhotoManager         *photoManager;
 @property (nullable, strong, nonatomic) TagManager           *tagManager;
+@property (nullable, strong, nonatomic) NSMutableArray * tagTextSizes;
 
 + (nullable instancetype)createInstance;
 - (nullable UIImageView *)getPhotoFromURL;
