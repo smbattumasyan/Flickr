@@ -1,5 +1,5 @@
 //
-//  Photo+CoreDataProperties.m
+//  Tag+CoreDataProperties.m
 //  Flikr
 //
 //  Created by Smbat Tumasyan on 3/7/16.
@@ -9,17 +9,11 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "Photo+CoreDataProperties.h"
+#import "Tag+CoreDataProperties.h"
 
-@implementation Photo (CoreDataProperties)
+@implementation Tag (CoreDataProperties)
 
-@dynamic farmID;
-@dynamic photoDate;
-@dynamic photoDescription;
-@dynamic photoID;
-@dynamic photoName;
-@dynamic secret;
-@dynamic serverID;
-@dynamic tags;
+@dynamic tag;
+@dynamic photos;
 
 @end

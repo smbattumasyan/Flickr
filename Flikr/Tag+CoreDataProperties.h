@@ -1,5 +1,5 @@
 //
-//  Photo+CoreDataProperties.m
+//  Tag+CoreDataProperties.h
 //  Flikr
 //
 //  Created by Smbat Tumasyan on 3/7/16.
@@ -9,17 +9,15 @@
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "Photo+CoreDataProperties.h"
+#import "Tag.h"
 
-@implementation Photo (CoreDataProperties)
+NS_ASSUME_NONNULL_BEGIN
 
-@dynamic farmID;
-@dynamic photoDate;
-@dynamic photoDescription;
-@dynamic photoID;
-@dynamic photoName;
-@dynamic secret;
-@dynamic serverID;
-@dynamic tags;
+@interface Tag (CoreDataProperties)
+
+@property (nullable, nonatomic, retain) NSString *tag;
+@property (nullable, nonatomic, retain) Photo *photos;
 
 @end
+
+NS_ASSUME_NONNULL_END

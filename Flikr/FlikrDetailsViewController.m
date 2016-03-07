@@ -10,7 +10,7 @@
 #import "FlikrWebService.h"
 #import "FlikrMockService.h"
 
-@interface FlikrDetailsViewController ()
+@interface FlikrDetailsViewController () < UICollectionViewDelegate>
 
 //------------------------------------------------------------------------------------------
 #pragma mark - IBOutlets
@@ -20,7 +20,9 @@
 @property (weak, nonatomic) IBOutlet UILabel     *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel     *photoNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel     *dateLabel;
-@property (weak, nonatomic) IBOutlet UIView      *tagsView;
+//@property (weak, nonatomic) IBOutlet UIView      *tagsView;
+
+@property (strong, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
 
@@ -34,11 +36,15 @@
 {
     [super viewDidLoad];
     
+    [self.flikerDetailsDataController initFetchResultControler];
     [self setFlikrImageView];
     [self.flikerDetailsDataController updateSelectedPhoto:self.flikerDetailsDataController.aPhoto updatedPhoto:^(Photo * _Nullable photo) {
          [self setupIBOutelts:photo];
     }];
-    [self addViewTags:10];
+    
+    self.collectionView.dataSource                  = self.flikerDetailsDataController;
+    self.flikerDetailsDataController.collectionView = self.collectionView;
+//    [self addViewTags:10];
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,6 +52,23 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+//------------------------------------------------------------------------------------------
+#pragma mark - UICollectionView Delegate
+//------------------------------------------------------------------------------------------
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 10;
+}
+
+//- (CGSize)collectionView:(UICollectionView *)collectionView
+//                  layout:(UICollectionViewLayout*)collectionViewLayout
+//  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    NSNumber *textSize = [self.flikerDetailsDataController.tagSizes objectAtIndex:indexPath.row];
+//    return CGSizeMake([textSize floatValue], 20.f);
+//}
 
 //------------------------------------------------------------------------------------------
 #pragma mark Private Methods
@@ -75,27 +98,27 @@
     self.dateLabel.text        = [NSDateFormatter localizedStringFromDate:aPhoto.photoDate dateStyle:NSDateFormatterShortStyle timeStyle:NSDateFormatterShortStyle];
 }
 
-- (void)addViewTags:(NSInteger )tags
-{
-    for (int i = 0; i < tags; i++) {
-        UILabel *tagLabel = [[UILabel alloc] initWithFrame: CGRectMake ( 5+i*60, 5, 50, 20)];
-        if (tagLabel.frame.origin.x >4*60) {
-            tagLabel = [[UILabel alloc] initWithFrame: CGRectMake ( 5+(-240)+i*60, 5+25, 50, 20)];
-        }
-        
-        tagLabel.backgroundColor     = [UIColor grayColor];
-        tagLabel.textAlignment       = NSTextAlignmentCenter;
-
-        tagLabel.layer.cornerRadius  = 10;
-        tagLabel.layer.masksToBounds = YES;
-        
-        static int i = 1;
-        
-        tagLabel.text = [NSString stringWithFormat:@"tag%i",i++];
-        
-        [self.tagsView addSubview:tagLabel];
-    }
-}
+//- (void)addViewTags:(NSInteger )tags
+//{
+//    for (int i = 0; i < tags; i++) {
+//        UILabel *tagLabel = [[UILabel alloc] initWithFrame: CGRectMake ( 5+i*60, 5, 50, 20)];
+//        if (tagLabel.frame.origin.x >4*60) {
+//            tagLabel = [[UILabel alloc] initWithFrame: CGRectMake ( 5+(-240)+i*60, 5+25, 50, 20)];
+//        }
+//        
+//        tagLabel.backgroundColor     = [UIColor grayColor];
+//        tagLabel.textAlignment       = NSTextAlignmentCenter;
+//
+//        tagLabel.layer.cornerRadius  = 10;
+//        tagLabel.layer.masksToBounds = YES;
+//        
+//        static int i = 1;
+//        
+//        tagLabel.text = [NSString stringWithFormat:@"tag%i",i++];
+//        
+//        [self.tagsView addSubview:tagLabel];
+//    }
+//}
 
 /*
 #pragma mark - Navigation

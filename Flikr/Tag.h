@@ -1,5 +1,5 @@
 //
-//  Photo.h
+//  Tag.h
 //  Flikr
 //
 //  Created by Smbat Tumasyan on 3/7/16.
@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Tag;
+@class Photo;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Photo : NSManagedObject
+@interface Tag : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -21,4 +21,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "Photo+CoreDataProperties.h"
+#import "Tag+CoreDataProperties.h"

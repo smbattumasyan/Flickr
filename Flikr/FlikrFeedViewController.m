@@ -34,7 +34,7 @@
     [super viewDidLoad];
 
     [self setupCollectionView];
-    [self.flikrFeedDataController initFetchResultControler];
+//    [self.flikrFeedDataController initFetchResultControler];
     [self.flikrFeedDataController loadPhotos];
     [self.navigationController.navigationBar setBackgroundColor:[UIColor orangeColor]];
 }
@@ -91,6 +91,7 @@
     self.flikrFeedDataController.photoManager   = photoManager;
     self.collectionView.dataSource              = self.flikrFeedDataController;
     self.flikrFeedDataController.collectionView = self.collectionView;
+    [self.flikrFeedDataController initFetchResultControler];
 }
 
 - (NSIndexPath *)selectedIndexPath
@@ -103,10 +104,13 @@
 {
     flikrDetailsVC.flikerDetailsDataController = [FlikrDetailsDataController createInstance];
     flikrDetailsVC.flikerDetailsDataController.photoManager      = self.flikrFeedDataController.photoManager;
+    flikrDetailsVC.flikerDetailsDataController.tagManager = [[TagManager alloc] init];
     flikrDetailsVC.flikerDetailsDataController.photoManager.coreDataManager   = self.flikrFeedDataController.photoManager.coreDataManager;
+    flikrDetailsVC.flikerDetailsDataController.tagManager.coreDataManager = self.flikrFeedDataController.photoManager.coreDataManager;
     flikrDetailsVC.flikerDetailsDataController.service           = self.flikrFeedDataController.service;
     flikrDetailsVC.flikerDetailsDataController.aPhoto            = [self.flikrFeedDataController.photoManager fetchSelectedPhoto:[self selectedIndexPath]];
     flikrDetailsVC.flikerDetailsDataController.selectedIndexPath = [self selectedIndexPath];
+//    [flikrDetailsVC.flikerDetailsDataController initFetchResultControler];
 }
 
 //------------------------------------------------------------------------------------------
