@@ -11,8 +11,6 @@
 
 @interface FlikrDetailsViewController : UIViewController
 
-
-
 @property (strong, nonatomic) FlikrDetailsDataController *flikerDetailsDataController;
 
 @end

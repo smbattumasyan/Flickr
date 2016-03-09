@@ -7,6 +7,7 @@
 //
 
 #import "FlikrDetailsDataController.h"
+#import "FlikrDetailsCell.h"
 
 @interface FlikrDetailsDataController ()
 
@@ -39,7 +40,7 @@
             [aPhoto setValue:[self setPhotoDateFormat:[imageJson valueForKeyPath: @"photo.dates.taken"]] forKey:@"photoDate"];
             [self loadTags:data];
             [self.photoManager.coreDataManager saveContext];
-            self.aPhoto = [self.photoManager fetchSelectedPhoto:self.selectedIndexPath];
+            self.aPhoto             = [self.photoManager fetchSelectedPhoto:self.selectedIndexPath];
             
             photo(self.aPhoto);
         });
@@ -57,21 +58,14 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"tagsCollectionIdentifier" forIndexPath:indexPath];
-    cell.backgroundView        = nil;
-
-    cell.backgroundColor = [UIColor grayColor];
-    UILabel *tagLabel    = [[UILabel alloc]initWithFrame:CGRectMake(2,0,cell.bounds.size.width,15)];
-    tagLabel.tag         = 200;
-
-    Tag *aTag               = [self.tagManager fetchSelectedTag:indexPath];
-    NSLog(@"tag:::%@",aTag.tag);
-    tagLabel.text           = aTag.tag;
-    [cell.contentView addSubview:tagLabel];
+    FlikrDetailsCell *cell  = [collectionView dequeueReusableCellWithReuseIdentifier:@"tagsCollectionIdentifier" forIndexPath:indexPath];
+    cell.backgroundView     = nil;
+    cell.backgroundColor    = [UIColor grayColor];
+    cell.aTag               = [self.tagManager fetchSelectedTag:indexPath];
     cell.layer.cornerRadius = 10;
     
-    CGSize textSize = [[tagLabel text] sizeWithAttributes:@{NSFontAttributeName:[tagLabel font]}];
-    [self.tagTextSizes insertObject:[NSNumber numberWithFloat:textSize.width] atIndex:indexPath.row];
+//    CGSize textSize = [[tagLabel text] sizeWithAttributes:@{NSFontAttributeName:[tagLabel font]}];
+//    [self.tagTextSizes insertObject:[NSNumber numberWithFloat:textSize.width] atIndex:indexPath.row];
     return cell;
 }
 
@@ -204,9 +198,10 @@
     [self.tagManager deleteTag:savedTags];
     
     tags      = [[tagsJson valueForKeyPath:@"photo.tags.tag.raw"] mutableCopy];
-    savedTags = [[[self.photoManager fetchedResultsController] fetchedObjects] mutableCopy];
+    savedTags = [[[[self.tagManager fetchedResultsController] fetchedObjects] valueForKey:@"tag"] mutableCopy];
     for (NSInteger i = tags.count - 1; i >= 0; i--) {
         NSString *aTag = tags[i];
+        NSLog(@"%@",aTag);
         if ([savedTags containsObject:aTag]) {
             [tags removeObject:aTag];
         }

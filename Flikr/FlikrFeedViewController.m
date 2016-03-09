@@ -110,7 +110,6 @@
     flikrDetailsVC.flikerDetailsDataController.service                      = self.flikrFeedDataController.service;
     flikrDetailsVC.flikerDetailsDataController.aPhoto                       = [self.flikrFeedDataController.photoManager fetchSelectedPhoto:[self selectedIndexPath]];
     flikrDetailsVC.flikerDetailsDataController.selectedIndexPath            = [self selectedIndexPath];
-//    [flikrDetailsVC.flikerDetailsDataController initFetchResultControler];
 }
 
 //------------------------------------------------------------------------------------------
