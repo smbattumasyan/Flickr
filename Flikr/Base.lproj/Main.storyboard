@@ -215,7 +215,7 @@
                                     <constraint firstAttribute="height" constant="57" id="0wj-J4-Cpj"/>
                                     <constraint firstAttribute="width" constant="240" id="dL5-Pa-rYA"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="4" id="f6k-ug-OZa">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="3" minimumInteritemSpacing="4" id="f6k-ug-OZa">
                                     <size key="itemSize" width="100" height="20"/>
                                     <size key="headerReferenceSize" width="0.0" height="6"/>
                                     <size key="footerReferenceSize" width="0.0" height="8"/>
@@ -229,8 +229,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9wc-ff-OFV">
-                                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sAW-KA-F1h">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -239,35 +239,57 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="9wc-ff-OFV" secondAttribute="trailing" constant="8" id="6lc-9E-TCS"/>
-                                            <constraint firstItem="9wc-ff-OFV" firstAttribute="leading" secondItem="eHR-ZI-Hhj" secondAttribute="leading" constant="8" id="Me5-gv-JBP"/>
-                                            <constraint firstItem="9wc-ff-OFV" firstAttribute="top" secondItem="eHR-ZI-Hhj" secondAttribute="top" id="ZH4-fa-qIK"/>
-                                            <constraint firstAttribute="bottom" secondItem="9wc-ff-OFV" secondAttribute="bottom" id="piN-Q0-rrr"/>
+                                            <constraint firstItem="sAW-KA-F1h" firstAttribute="centerY" secondItem="eHR-ZI-Hhj" secondAttribute="centerY" id="69c-YD-bUs"/>
+                                            <constraint firstItem="sAW-KA-F1h" firstAttribute="centerY" secondItem="eHR-ZI-Hhj" secondAttribute="centerY" id="6Ee-cm-fck"/>
+                                            <constraint firstItem="sAW-KA-F1h" firstAttribute="centerX" secondItem="eHR-ZI-Hhj" secondAttribute="centerX" id="Fcs-MO-gLq"/>
+                                            <constraint firstAttribute="trailing" secondItem="sAW-KA-F1h" secondAttribute="trailing" id="LVc-9K-QHj"/>
+                                            <constraint firstItem="sAW-KA-F1h" firstAttribute="centerX" secondItem="eHR-ZI-Hhj" secondAttribute="centerX" id="NVC-X4-6eF"/>
+                                            <constraint firstItem="sAW-KA-F1h" firstAttribute="top" secondItem="eHR-ZI-Hhj" secondAttribute="top" id="Vga-Yh-Sp1"/>
+                                            <constraint firstItem="sAW-KA-F1h" firstAttribute="top" secondItem="eHR-ZI-Hhj" secondAttribute="top" id="X8e-fv-ljh"/>
+                                            <constraint firstAttribute="bottom" secondItem="sAW-KA-F1h" secondAttribute="bottom" id="bYC-7k-0Ii"/>
+                                            <constraint firstItem="sAW-KA-F1h" firstAttribute="leading" secondItem="eHR-ZI-Hhj" secondAttribute="leading" id="eQs-Ow-sf5"/>
+                                            <constraint firstItem="sAW-KA-F1h" firstAttribute="leading" secondItem="eHR-ZI-Hhj" secondAttribute="leading" id="l7n-Bd-MS2"/>
+                                            <constraint firstAttribute="bottom" secondItem="sAW-KA-F1h" secondAttribute="bottom" id="qSy-W3-0oS"/>
+                                            <constraint firstAttribute="trailing" secondItem="sAW-KA-F1h" secondAttribute="trailing" id="zgk-aP-0fi"/>
                                         </constraints>
                                         <variation key="default">
-                                            <mask key="subviews">
-                                                <exclude reference="9wc-ff-OFV"/>
-                                            </mask>
                                             <mask key="constraints">
-                                                <exclude reference="6lc-9E-TCS"/>
-                                                <exclude reference="Me5-gv-JBP"/>
-                                                <exclude reference="ZH4-fa-qIK"/>
-                                                <exclude reference="piN-Q0-rrr"/>
+                                                <exclude reference="69c-YD-bUs"/>
+                                                <exclude reference="6Ee-cm-fck"/>
+                                                <exclude reference="Fcs-MO-gLq"/>
+                                                <exclude reference="LVc-9K-QHj"/>
+                                                <exclude reference="NVC-X4-6eF"/>
+                                                <exclude reference="Vga-Yh-Sp1"/>
+                                                <exclude reference="X8e-fv-ljh"/>
+                                                <exclude reference="bYC-7k-0Ii"/>
+                                                <exclude reference="eQs-Ow-sf5"/>
+                                                <exclude reference="l7n-Bd-MS2"/>
+                                                <exclude reference="qSy-W3-0oS"/>
+                                                <exclude reference="zgk-aP-0fi"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=compact-widthClass=regular">
+                                            <mask key="constraints">
+                                                <include reference="69c-YD-bUs"/>
+                                                <include reference="Fcs-MO-gLq"/>
+                                                <include reference="LVc-9K-QHj"/>
+                                                <include reference="X8e-fv-ljh"/>
+                                                <include reference="bYC-7k-0Ii"/>
+                                                <include reference="l7n-Bd-MS2"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
-                                            <mask key="subviews">
-                                                <include reference="9wc-ff-OFV"/>
-                                            </mask>
                                             <mask key="constraints">
-                                                <include reference="6lc-9E-TCS"/>
-                                                <include reference="Me5-gv-JBP"/>
-                                                <include reference="ZH4-fa-qIK"/>
-                                                <include reference="piN-Q0-rrr"/>
+                                                <include reference="6Ee-cm-fck"/>
+                                                <include reference="NVC-X4-6eF"/>
+                                                <include reference="Vga-Yh-Sp1"/>
+                                                <include reference="eQs-Ow-sf5"/>
+                                                <include reference="qSy-W3-0oS"/>
+                                                <include reference="zgk-aP-0fi"/>
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <outlet property="tagLabel" destination="9wc-ff-OFV" id="wCi-8S-Mcw"/>
+                                            <outlet property="tagLabel" destination="sAW-KA-F1h" id="TRj-ip-OZ1"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -284,6 +306,9 @@
                                         <exclude reference="0wj-J4-Cpj"/>
                                         <exclude reference="dL5-Pa-rYA"/>
                                     </mask>
+                                </variation>
+                                <variation key="heightClass=compact" ambiguous="YES" misplaced="YES">
+                                    <rect key="frame" x="267" y="169" width="63" height="53"/>
                                 </variation>
                                 <variation key="heightClass=compact-widthClass=regular">
                                     <mask key="constraints">
@@ -455,7 +480,8 @@
                             </mask>
                         </variation>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="collectionView" destination="K5F-zO-4Z7" id="UB0-5v-Nfr"/>
                         <outlet property="dateLabel" destination="ISM-FA-uxe" id="ow0-Jw-8sN"/>

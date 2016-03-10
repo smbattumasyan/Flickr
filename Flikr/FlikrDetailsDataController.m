@@ -64,8 +64,7 @@
     cell.aTag               = [self.tagManager fetchSelectedTag:indexPath];
     cell.layer.cornerRadius = 10;
     
-//    CGSize textSize = [[tagLabel text] sizeWithAttributes:@{NSFontAttributeName:[tagLabel font]}];
-//    [self.tagTextSizes insertObject:[NSNumber numberWithFloat:textSize.width] atIndex:indexPath.row];
+    UIFont *font=[UIFont fontWithName:@"Arial" size:16.f];
     return cell;
 }
 
@@ -160,7 +159,6 @@
     }];
 }
 
-
 //------------------------------------------------------------------------------------------
 #pragma mark Private Methods
 //------------------------------------------------------------------------------------------
@@ -217,6 +215,15 @@
     NSDate *photoDate           = [dateFormat dateFromString:[NSString stringWithFormat:@"%@",dateString]];
     
     return photoDate;
+}
+
+-(CGFloat)getSizeOfString:(NSIndexPath *)indexPath
+{
+    Tag *aTag = [self.tagManager fetchSelectedTag:indexPath];
+    UIFont *font=[UIFont fontWithName:@"Arial" size:14.f];
+    NSLog(@"indexpath:%ld string:%@", (long)indexPath.row,aTag.tag);
+    CGSize textSize = [aTag.tag sizeWithAttributes:@{NSFontAttributeName:font}];
+    return textSize.width;
 }
 
 - (void)initFetchResultControler

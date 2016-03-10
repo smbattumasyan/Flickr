@@ -28,6 +28,7 @@
 + (nullable instancetype)createInstance;
 - (nullable UIImageView *)getPhotoFromURL;
 - (void)initFetchResultControler;
+- (CGFloat)getSizeOfString:(nullable NSIndexPath *)indexPath;
 - ( void)updateSelectedPhoto:(nullable Photo *)aPhoto updatedPhoto:(nullable void(^)(Photo * _Nullable))photo;
 
 @end

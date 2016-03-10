@@ -9,6 +9,7 @@
 #import "FlikrDetailsViewController.h"
 #import "FlikrWebService.h"
 #import "FlikrMockService.h"
+#import "FlikrDetailsCell.h"
 
 @interface FlikrDetailsViewController () < UICollectionViewDelegate>
 
@@ -55,18 +56,17 @@
 #pragma mark - UICollectionView Delegate
 //------------------------------------------------------------------------------------------
 
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 10;
-}
-
-//- (CGSize)collectionView:(UICollectionView *)collectionView
-//                  layout:(UICollectionViewLayout*)collectionViewLayout
-//  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+//- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 //{
-//    
-//    return CGSizeMake([self.textSize floatValue], 20.f);
+//    return 10;
 //}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake([self.flikerDetailsDataController getSizeOfString:indexPath]*2, 20.f);
+}
 
 //------------------------------------------------------------------------------------------
 #pragma mark Private Methods
